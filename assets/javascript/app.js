@@ -4,11 +4,9 @@ var latitude,longitude;
 /* var venueCount = 0;
 var groupCount = 0; */
 
-var events = {
-
-    "type": "FeatureCollection",
-    "features": []
-}
+var events = {};
+var map;
+var initiated=false;
 
 $(document).ready(function() {
 
@@ -31,14 +29,25 @@ function getCurrentLocation (position) {
     longitude = position.coords.longitude;
     console.log ("lon is "+longitude+" and lat is "+latitude);
     
-    // call all other functions from here for the first time e.g.
-    //renderMaps() for now.
+    //Call displayMeetupAPI() before calling renderMap() so that the event object
+    //is ready
+    displayMeetupAPI();
+    
+    //This will create the map and render all the data
+
+    renderMap();
 }
 
 function displayMeetupAPI() {
 
+    
+
+    console.log("in "+ latitude);
+        console.log(longitude);
     var proxyURL = "https://cors-anywhere.herokuapp.com/";
     var queryURL = proxyURL + "https://api.meetup.com/find/upcoming_events?key=3f604954571041164226827581f6062&radius=30.0&lat=" + latitude + "&lon=" + longitude;
+
+    console.log(queryURL);
 
     // Creating an AJAX call for Meetup API
     $.ajax({
@@ -46,6 +55,12 @@ function displayMeetupAPI() {
     method: "GET"
     }).then(function(response) {
 
+        events = {
+
+            "type": "FeatureCollection",
+            "features": []
+        };
+        
         // Logging original response object that is coming over from Meetup API
         console.log(response);
 
@@ -68,13 +83,13 @@ function displayMeetupAPI() {
                 }
             }
 
-            if (response.events[i].hasOwnProperty("venue")) {
+            if (response.events[i].hasOwnProperty("venue") && response.events[i].venue.lon != 0) {
 
                 // TESTING PURPOSES: Counter var tracking number of events with a venue property
                 /* venueCount++; */
 
-                event.geometry.coordinates.push(response.events[i].venue.lat);
                 event.geometry.coordinates.push(response.events[i].venue.lon);
+                event.geometry.coordinates.push(response.events[i].venue.lat);
                 event.properties.name = response.events[i].name;
                 event.properties.link = response.events[i].link;
                 event.properties.visibility = response.events[i].visibility;
@@ -87,8 +102,9 @@ function displayMeetupAPI() {
                 // TESTING PURPOSES: Counter var tracking number of events with only a group property
                 /* groupCount++; */
 
-                event.geometry.coordinates.push(response.events[i].group.lat);
+                
                 event.geometry.coordinates.push(response.events[i].group.lon);
+                event.geometry.coordinates.push(response.events[i].group.lat);
                 event.properties.name = response.events[i].name;
                 event.properties.link = response.events[i].link;
                 event.properties.visibility = response.events[i].visibility;
@@ -96,7 +112,11 @@ function displayMeetupAPI() {
 
                 events.features.push(event);
             }
+
         }
+        if (initiated)
+            updateMap();
+        
 
         // TESTING PURPOSES: Logging counter variables for events with a venue property and those with only a group property
         /* console.log(venueCount);
@@ -108,4 +128,182 @@ function displayMeetupAPI() {
 }
 
 // Button added for testing purposes, so that you can run the AJAX call to Meetup API
-$(document).on("click", "#get-res", displayMeetupAPI);
+//$(document).on("click", "#get-res", displayMeetupAPI);
+
+var renderMap = function () {
+    
+    
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYWlzaHRpYXEiLCJhIjoiY2psdnBtY2VvMDUyMTNxcXN0ZGJwcjd2YiJ9.jiV57t9pdOYOb8iJc_xABg';
+    map = new mapboxgl.Map({
+        container: 'map', // container id
+        style: 'mapbox://styles/mapbox/light-v9', // stylesheet location
+        center: [longitude, latitude], // starting position [lng, lat]
+        zoom: 8 // starting zoom
+    });
+    
+    //create the geocoder
+    var geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken
+    });
+    $('#geocoder').append(geocoder.onAdd(map));
+
+    geocoder.on('result', function(ev) {
+        events = {};
+        
+        //once the location changes run displayMeetupAPI to get new data 
+        longitude=ev.result.geometry.coordinates[0];
+        latitude=ev.result.geometry.coordinates[1];
+
+        console.log(latitude);
+        console.log(longitude);
+
+        displayMeetupAPI();
+    });
+
+    
+    
+    map.on('load', function (e) {
+        map.addSource("places", {
+            "type": "geojson",
+            "data": events
+        });
+
+        // Initialize the list
+        displayMarkers(events);
+        buildLocationList(events);
+        initiated=true;
+    
+    });
+
+
+}
+
+function updateMap(){
+    console.log("in update map");
+    console.log(events);
+
+    clearMap();
+    
+    map.getSource('places').setData(events);
+    
+    //create the Markters
+    displayMarkers(events);
+
+    //Populate the meetup table
+    buildLocationList(events);
+    
+}
+
+function clearMap() {
+    $('.marker').remove();
+    $('#listings').empty();
+}
+
+function displayMarkers(events) {
+
+    
+    events.features.forEach(function(marker, i) {
+       
+        var el = document.createElement('div');
+        el.innerHTML="<i class='fas fa-map-marker-alt fa-2x'>";
+        el.setAttribute("class","marker");
+                
+        new mapboxgl.Marker(el)
+            .setLngLat(marker.geometry.coordinates)
+            .addTo(map);
+    
+        el.addEventListener('click', function(e){
+            // 1. Fly to the point
+            flyToEvent(marker);
+    
+            // 2. Close all other popups and display popup for clicked store
+            createPopUp(marker);
+    
+            // 3. Highlight listing in sidebar (and remove highlight for all other listings)
+            // var activeItem = document.getElementsByClassName('active');
+    
+            // e.stopPropagation();
+            // if (activeItem[0]) {
+            //    activeItem[0].classList.remove('active');
+            // }
+    
+            // var listing = document.getElementById('listing-' + i);
+            // listing.classList.add('active');
+    
+        });
+    });
+}
+function flyToEvent(currentFeature) {
+    map.flyTo({
+        center: currentFeature.geometry.coordinates,
+        zoom: 12
+    });
+}
+
+function createPopUp(currentFeature) {
+    var popUps = document.getElementsByClassName('mapboxgl-popup');
+    if (popUps[0]) popUps[0].remove();
+
+
+    var popup = new mapboxgl.Popup({closeOnClick: false})
+        .setLngLat(currentFeature.geometry.coordinates)
+        .setHTML('<h5>'+currentFeature.properties.name+'</h5>' +
+            '<p>' + currentFeature.properties.address + '</p>')
+        .addTo(map);
+}
+
+function buildLocationList(data) {
+    for (i = 0; i < data.features.length; i++) {
+        var currentFeature = data.features[i];
+
+        //this is where all the properties are
+        var prop = currentFeature.properties;
+
+        //dont change this
+        var listings = $('#listings');
+        var listing = $("<div>");
+        listing.addClass('item');
+        listing.attr("id","listing-" + i);
+
+        listings.append(listing);
+
+        //this is converting the address to a link. you can change it to what you want
+        // dont change the rest of the code
+        var link = $('<a>');
+        link.attr("href", '#');
+        link.addClass("link");
+        link.attr("data-position", i);
+        link.html(prop.address);
+        listing.append(link);
+
+        //you can display what ever else you want
+        var details = $("<div>");
+        details.html(prop.name);
+
+        listings.append(details);
+       
+        //dont change this
+        $(document).on('click','.link' ,function(e){
+            // Update the currentFeature to the store associated with the clicked link
+            var clickedListing = data.features[$(this).attr("data-position")];
+        
+            // 1. Fly to the point
+            flyToEvent(clickedListing);
+        
+            // 2. Close all other popups and display popup for clicked store
+            createPopUp(clickedListing);
+        
+            // 3. Highlight listing in sidebar (and remove highlight for all other listings)
+            // var activeItem = document.getElementsByClassName('active');
+        
+            // if (activeItem[0]) {
+            // activeItem[0].classList.remove('active');
+            // }
+            // this.parentNode.classList.add('active');
+        
+         });
+
+
+        
+    }
+}
