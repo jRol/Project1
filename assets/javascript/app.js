@@ -6,37 +6,44 @@ var groupCount = 0; */
 
 var events = {};
 var map;
-var initiated=false;
+var mapInitiated=false;
+//var appInitiated=false;
+
+  
+
 
 $(document).ready(function() {
+    var config = {
+        apiKey: "AIzaSyC9pE2ORuZUcAnZM_4fnUDSScgurVLBbN8",
+        authDomain: "gwbootcamp-97ba0.firebaseapp.com",
+        databaseURL: "https://gwbootcamp-97ba0.firebaseio.com",
+        projectId: "gwbootcamp-97ba0",
+        storageBucket: "gwbootcamp-97ba0.appspot.com",
+        messagingSenderId: "454079581913"
+      };
+    firebase.initializeApp(config);
+    var database = firebase.database();
 
-    geoLoc();
+    database.ref("/sessionData").once("value", function(snapshot){
+        var sv=snapshot.val();
+        console.log(sv);
+        // appInitiated=sv.appInitiated;
+        longitude=sv.longitude;
+        latitude=sv.latitude;
+
+        console.log("in snapshot");
+        console.log(mapInitiated);
+        displayMeetupAPI();
+        
+      
+
+        
+    });
+
+   
 });
 
-function geoLoc() {
-  
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(getCurrentLocation);
-       
-    } else {
-        console.log ("geolocation not available");
-    }
-}
 
-function getCurrentLocation (position) {
- 
-    latitude = position.coords.latitude;
-    longitude = position.coords.longitude;
-    console.log ("lon is "+longitude+" and lat is "+latitude);
-    
-    //Call displayMeetupAPI() before calling renderMap() so that the event object
-    //is ready
-    displayMeetupAPI();
-    
-    //This will create the map and render all the data
-
-    renderMap();
-}
 
 function displayMeetupAPI() {
 
@@ -114,8 +121,10 @@ function displayMeetupAPI() {
             }
 
         }
-        if (initiated)
+        if (mapInitiated)
             updateMap();
+        else   
+            renderMap();
         
 
         // TESTING PURPOSES: Logging counter variables for events with a venue property and those with only a group property
@@ -132,11 +141,15 @@ function displayMeetupAPI() {
 
 var renderMap = function () {
     
-    
+    // database().ref('/sessionData').once("value", function(snapshot) {
+    //         ref.child(snapshot.key).remove();
+            
+    // });
+
     mapboxgl.accessToken = 'pk.eyJ1IjoiYWlzaHRpYXEiLCJhIjoiY2psdnBtY2VvMDUyMTNxcXN0ZGJwcjd2YiJ9.jiV57t9pdOYOb8iJc_xABg';
     map = new mapboxgl.Map({
         container: 'map', // container id
-        style: 'mapbox://styles/mapbox/light-v9', // stylesheet location
+        style: 'mapbox://styles/mapbox/streets-v9', // stylesheet location
         center: [longitude, latitude], // starting position [lng, lat]
         zoom: 8 // starting zoom
     });
@@ -145,7 +158,8 @@ var renderMap = function () {
     var geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken
     });
-    $('#geocoder').append(geocoder.onAdd(map));
+    //$('#geocoder').append(geocoder.onAdd(map));
+    document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
 
     geocoder.on('result', function(ev) {
         events = {};
@@ -171,7 +185,7 @@ var renderMap = function () {
         // Initialize the list
         displayMarkers(events);
         buildLocationList(events);
-        initiated=true;
+        mapInitiated=true;
     
     });
 
