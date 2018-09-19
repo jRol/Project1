@@ -7,12 +7,10 @@ var groupCount = 0; */
 var events = {};
 var map;
 var mapInitiated=false;
-//var appInitiated=false;
-
-  
 
 
 $(document).ready(function() {
+
     var config = {
         apiKey: "AIzaSyC9pE2ORuZUcAnZM_4fnUDSScgurVLBbN8",
         authDomain: "gwbootcamp-97ba0.firebaseapp.com",
@@ -20,34 +18,39 @@ $(document).ready(function() {
         projectId: "gwbootcamp-97ba0",
         storageBucket: "gwbootcamp-97ba0.appspot.com",
         messagingSenderId: "454079581913"
-      };
+        };
     firebase.initializeApp(config);
-    var database = firebase.database();
-
-    // database.ref("/sessionData").once("value", function(snapshot){
-    //     var sv=snapshot.val();
-    //     console.log(sv);
-    //     // appInitiated=sv.appInitiated;
-    //     longitude=sv.longitude;
-    //     latitude=sv.latitude;
-
-    //     console.log("in snapshot");
-    //     console.log(mapInitiated);
-    //     displayMeetupAPI();
         
     longitude=sessionStorage.getItem("longitude");
     latitude=sessionStorage.getItem("latitude");
-    console.log("in snapshot");
+    
     console.log(mapInitiated);
     displayMeetupAPI();
-        
-    // });
-
     
-   
 });
 
+$(document).on("click",'.star',function(){
+    var favMeetup = events.features[$(this).attr("data-position")];
+    console.log("star clicked");
+    console.log($(this).attr("data-position"));
 
+    console.log(favMeetup.properties);
+    
+    var database = firebase.database();
+
+    database.ref('/meetupFavs').push({
+        favMeetup: favMeetup.properties
+    });
+    
+    $("#myModal").modal();
+
+    setTimeout(function(){
+        $('#myModal').modal('hide')
+      }, 3000);
+    
+    
+     
+});
 
 function displayMeetupAPI() {
 
@@ -56,6 +59,7 @@ function displayMeetupAPI() {
     console.log("in "+ latitude);
         console.log(longitude);
     var proxyURL = "https://cors-anywhere.herokuapp.com/";
+    //var proxyURL="https://secret-ocean-49799.herokuapp.com/";
     var queryURL = proxyURL + "https://api.meetup.com/find/upcoming_events?key=3f604954571041164226827581f6062&radius=30.0&lat=" + latitude + "&lon=" + longitude;
 
     console.log(queryURL);
@@ -279,6 +283,11 @@ function buildLocationList(data) {
 
         //dont change this
         var listings = $('#listings');
+        var favButton = $("<p class='mx-1 my-1 star' data-toggle='modal' data-target='#myModal' >");
+        favButton.html('<i class="fas fa-star float-left"></i>');
+        favButton.attr("data-position",i);
+        listings.append(favButton);
+
         var listing = $("<div>");
         listing.addClass('item');
         listing.attr("id","listing-" + i);
@@ -299,12 +308,15 @@ function buildLocationList(data) {
         details.html(prop.name);
 
         listings.append(details);
+
+        
        
         //dont change this
         $(document).on('click','.link' ,function(e){
             // Update the currentFeature to the store associated with the clicked link
             var clickedListing = data.features[$(this).attr("data-position")];
-        
+            console.log("listing clicked");
+            console.log($(this).attr("data-position"));
             // 1. Fly to the point
             flyToEvent(clickedListing);
         
@@ -320,6 +332,8 @@ function buildLocationList(data) {
             // this.parentNode.classList.add('active');
         
          });
+
+        
 
 
         
