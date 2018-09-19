@@ -47,7 +47,7 @@ function getCurrentLocation (position) {
     console.log ("lon is "+longitude+" and lat is "+latitude);
     
     var APIKey = "9cf07e60efb34da49a4496096daf288b";
-    var queryURL="http://api.openweathermap.org/data/2.5/weather?lat="+latitude + "&lon=" + longitude + "&APPID=" + APIKey;
+    var queryURL="https://api.openweathermap.org/data/2.5/weather?lat="+latitude + "&lon=" + longitude + "&APPID=" + APIKey;
 
     $.ajax({
         url: queryURL,
