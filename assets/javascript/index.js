@@ -1,29 +1,17 @@
 var latitude, longitude;
 
 $(document).ready(function() {
-    var config = {
-        apiKey: "AIzaSyC9pE2ORuZUcAnZM_4fnUDSScgurVLBbN8",
-        authDomain: "gwbootcamp-97ba0.firebaseapp.com",
-        databaseURL: "https://gwbootcamp-97ba0.firebaseio.com",
-        projectId: "gwbootcamp-97ba0",
-        storageBucket: "gwbootcamp-97ba0.appspot.com",
-        messagingSenderId: "454079581913"
-      };
-    firebase.initializeApp(config);
-    var database = firebase.database();
-
+    
+    sessionStorage.clear();
     geoLoc();
        
 
     $("#confirm").on("click", function(){
-        console.log("in button");
+        
         if(longitude && latitude) {
-            console.log("here");
-            database.ref('/sessionData').set({
-                    // appInitiated: true,
-                    latitude: latitude,
-                    longitude: longitude
-            });
+            // Store all content into sessionStorage
+            sessionStorage.setItem("longitude", longitude);
+            sessionStorage.setItem("latitude", latitude);
             window.location.href = "main.html";
         }
         

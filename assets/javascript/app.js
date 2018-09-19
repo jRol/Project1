@@ -24,22 +24,26 @@ $(document).ready(function() {
     firebase.initializeApp(config);
     var database = firebase.database();
 
-    database.ref("/sessionData").once("value", function(snapshot){
-        var sv=snapshot.val();
-        console.log(sv);
-        // appInitiated=sv.appInitiated;
-        longitude=sv.longitude;
-        latitude=sv.latitude;
+    // database.ref("/sessionData").once("value", function(snapshot){
+    //     var sv=snapshot.val();
+    //     console.log(sv);
+    //     // appInitiated=sv.appInitiated;
+    //     longitude=sv.longitude;
+    //     latitude=sv.latitude;
 
-        console.log("in snapshot");
-        console.log(mapInitiated);
-        displayMeetupAPI();
+    //     console.log("in snapshot");
+    //     console.log(mapInitiated);
+    //     displayMeetupAPI();
         
-      
-
+    longitude=sessionStorage.getItem("longitude");
+    latitude=sessionStorage.getItem("latitude");
+    console.log("in snapshot");
+    console.log(mapInitiated);
+    displayMeetupAPI();
         
-    });
+    // });
 
+    
    
 });
 
