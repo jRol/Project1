@@ -167,8 +167,8 @@ var renderMap = function () {
         accessToken: mapboxgl.accessToken
     });
     //$('#geocoder').append(geocoder.onAdd(map));
-    document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
-
+    //document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+    map.addControl(geocoder);
     geocoder.on('result', function(ev) {
         events = {};
         
@@ -281,18 +281,18 @@ function buildLocationList(data) {
         //this is where all the properties are
         var prop = currentFeature.properties;
 
-        //dont change this
-        var listings = $('#listings');
-        var favButton = $("<p class='mx-1 my-1 star' data-toggle='modal' data-target='#myModal' >");
-        favButton.html('<i class="fas fa-star float-left"></i>');
-        favButton.attr("data-position",i);
-        listings.append(favButton);
+       
 
-        var listing = $("<div>");
+        var listing = $("<li>");
         listing.addClass('item');
         listing.attr("id","listing-" + i);
 
-        listings.append(listing);
+         //dont change this
+         var listings = $('#listings');
+         var favButton = $("<p class='mx-1 my-1 star' data-toggle='modal' data-target='#myModal' >");
+         favButton.html('<i class="fas fa-star float-left"></i>');
+         favButton.attr("data-position",i);
+         listing.append(favButton);
 
         //this is converting the address to a link. you can change it to what you want
         // dont change the rest of the code
@@ -307,9 +307,9 @@ function buildLocationList(data) {
         var details = $("<div>");
         details.html(prop.name);
 
-        listings.append(details);
+        listing.append(details);
 
-        
+        listings.append(listing);
        
         //dont change this
         $(document).on('click','.link' ,function(e){
