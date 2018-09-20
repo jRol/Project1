@@ -9,7 +9,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style-2.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
@@ -29,29 +29,285 @@
 
     
 
-        <div class="container">
-                
+
+        <div class="site-content">
+            <div class="site-header">
+              <div class="container">
+                  <div class="modal fade" id="myModal" role="dialog" >
+                      <div class="modal-dialog">
+                      
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-body">
+                            <p>Favorite Added</p>
+                          </div>
+                          
+                        </div>
+                        
+                      </div>
+                    </div>
+                <a href="index.html" class="branding">
+                  <!--img src="images/logo.png" alt="" class="logo"-->
+                  <div class="logo-type">
+                    <h1 class="site-title">Weather'd Plans</h1>
+                    <small class="site-description">WeatherProof your day</small>
+                  </div>
+                </a>
+      
+                <!-- Navigation -->
+                <div class="main-navigation">
+                  <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+                  <ul class="menu">
+                    <li class="menu-item current-menu-item"><a href="landing.html">Home</a></li>
+                    <li class="menu-item"><a href="#">Main</a></li>
+                    
+                  </ul> <!-- .menu -->
+                </div> <!-- .main-navigation -->
+      
+                <div class="mobile-navigation"></div>
+      
+              </div>
+            </div> <!-- .site-header -->
+      
+            <div class="hero" >
+              <div class="container">
+                <!-- <form action="#" class="find-location">
+                  <input type="text" placeholder="Find your location...">
+                  <input type="submit" value="Find">
+                </form> -->
                 <div id='geocoder' class='geocoder'></div>
-                <div id='map' style='width: 600px; height: 350px;'></div>
-                <!-- <button id="get-res">GET</button> -->
-                <div id='listings' class='listings'></div>
-                <!-- style="position: absolute; top: 40%;" -->
-                <div class="modal fade" id="myModal" role="dialog" >
-                                <div class="modal-dialog">
-                                
-                                  <!-- Modal content-->
-                                  <div class="modal-content">
-                                    <div class="modal-body">
-                                      <p>Favorite Added</p>
-                                    </div>
-                                    
-                                  </div>
+                <div id='map' class='map'></div>
+             
+              </div>
+            </div>
+            <div class="forecast-table">
+              <div class="container">
+                <div class="forecast-container">
+                  <div class="today forecast">
+                    <div class="forecast-header">
+                      <div class="day">Monday</div>
+                      <div class="date">6 Oct</div>
+                    </div> <!-- .forecast-header -->
+                    <div class="forecast-content">
+                      <div class="location">New York</div>
+                      <div class="degree">
+                        <div class="num">23<sup>o</sup>C</div>
+                        <div class="forecast-icon">
+                          <!--img src="assets/images/weather.sv" alt="" width=90-->
+                        </div>	
+                      </div>
+                      <!--span><img src="images/icon-umberella.png" alt="">20%</span>
+                      <span><img src="images/icon-wind.png" alt="">18km/h</span>
+                      <span><img src="images/icon-compass.png" alt="">East</span-->
+                    </div>
+                  </div>
+                  <div class="forecast">
+                    <div class="forecast-header">
+                      <div class="day">Tuesday</div>
+                    </div> <!-- .forecast-header -->
+                    <div class="forecast-content">
+                      <div class="forecast-icon">
+                        <!--img src="images/icons/icon-3.svg" alt="" width=48-->
+                      </div>
+                      <div class="degree">23<sup>o</sup>C</div>
+                      <small>18<sup>o</sup></small>
+                    </div>
+                  </div>
+                  <div class="forecast">
+                    <div class="forecast-header">
+                      <div class="day">Wednesday</div>
+                    </div> <!-- .forecast-header -->
+                    <div class="forecast-content">
+                      <div class="forecast-icon">
+                        <!--img src="images/icons/icon-5.svg" alt="" width=48-->
+                      </div>
+                      <div class="degree">23<sup>o</sup>C</div>
+                      <small>18<sup>o</sup></small>
+                    </div>
+                  </div>
+                  <div class="forecast">
+                    <div class="forecast-header">
+                      <div class="day">Thursday</div>
+                    </div> <!-- .forecast-header -->
+                    <div class="forecast-content">
+                      <div class="forecast-icon">
+                        <!--img src="images/icons/icon-7.svg" alt="" width=48-->
+                      </div>
+                      <div class="degree">23<sup>o</sup>C</div>
+                      <small>18<sup>o</sup></small>
+                    </div>
+                  </div>
+                  <div class="forecast">
+                    <div class="forecast-header">
+                      <div class="day">Friday</div>
+                    </div> <!-- .forecast-header -->
+                    <div class="forecast-content">
+                      <div class="forecast-icon">
+                        <!--img src="images/icons/icon-12.svg" alt="" width=48-->
+                      </div>
+                      <div class="degree">23<sup>o</sup>C</div>
+                      <small>18<sup>o</sup></small>
+                    </div>
+                  </div>
+                  <div class="forecast">
+                    <div class="forecast-header">
+                      <div class="day">Saturday</div>
+                    </div> <!-- .forecast-header -->
+                    <div class="forecast-content">
+                      <div class="forecast-icon">
+                        <!--img src="images/icons/icon-13.svg" alt="" width=48-->
+                      </div>
+                      <div class="degree">23<sup>o</sup>C</div>
+                      <small>18<sup>o</sup></small>
+                    </div>
+                  </div>
+                  <div class="forecast">
+                    <div class="forecast-header">
+                      <div class="day">Sunday</div>
+                    </div> <!-- .forecast-header -->
+                    <div class="forecast-content">
+                      <div class="forecast-icon">
+                        <!--img src="images/icons/icon-14.svg" alt="" width=48-->
+                      </div>
+                      <div class="degree">23<sup>o</sup>C</div>
+                      <small>18<sup>o</sup></small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+      
+              <div class="fullwidth-block" data-bg-color="#262936">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="news">
+                        <div class="date">06.10</div>
+                        <h3><a href="#">Top One Event </a></h3>
+                        <p><img src="assets/images/placeholder.png" alt="#"></p>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="news">
+                        <div class="date">06.10</div>
+                        <h3><a href="#">Top Two Event</a></h3>
+                        <p><img src="assets/images/placeholder.png" alt="#"></p>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                                          <div class="Meetup-event">
+                                                   
+                                                  <h3><img class="meetup-icon" src="assets/images/meetup2.jpg" style="width: 48px;height: 48px;"> Categories </a></h3>
+                                                  
+                                              
+                                          <div class="input-group mb-3">
+                                                  <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                      <input type="checkbox" aria-label="Checkbox for following text input">
+                                                    </div>
+                                                  </div>
+                                                  <!--input type="text" class="event-out" aria-label="Text input with checkbox"-->
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                      <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                          <input type="checkbox" aria-label="Checkbox for following text input">
+                                                        </div>
+                                                      </div>
+                                                      <!--input type="text" class="event-out" aria-label="Text input with checkbox"-->
+                                                    </div>
+                                                    <div class="input-group mb-3">
+                                                          <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                              <input type="checkbox" aria-label="Checkbox for following text input">
+                                                            </div>
+                                                          </div>
+                                                          <!--input type="text" class="event-out" aria-label="Text input with checkbox"-->
+                                                        </div>
+                                                        <div class="input-group mb-3">
+                                                              <div class="input-group-prepend">
+                                                                <div class="input-group-text">
+                                                                  <input type="checkbox" aria-label="Checkbox for following text input">
+                                                                </div>
+                                                              </div>
+                                                              <!--input type="text" class="event-out" aria-label="Text input with checkbox"-->
+                                                            </div>
+                                                            <div class="input-group mb-3">
+                                                                  <div class="input-group-prepend">
+                                                                    <div class="input-group-text">
+                                                                      <input type="checkbox" aria-label="Checkbox for following text input">
+                                                                    </div>
+                                                                  </div>
+                                                                  <!--input type="text" class="event-out" aria-label="Text input with checkbox"-->
+                                                                </div>
+                                                                <div class="input-group mb-3">
+                                                                      <div class="input-group-prepend">
+                                                                        <div class="input-group-text">
+                                                                          <input type="checkbox" aria-label="Checkbox for following text input">
+                                                                        </div>
+                                                                      </div>
+                                                                      <!--input type="text" class="event-out" aria-label="Text input with checkbox"-->
+                                                                    </div>
+                                                                  </div>
+                                                                    
+                                                  
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="fullwidth-block">
+                <div class="container">
+                  <div class="row">
+      
                                   
-                                </div>
+                    
+                    <div class="col-md-6">
+                                          
+                                                  
+                                      <h2 class="section-title">Meetup Events</h2>
+      
+                      <ul id="listings" class="arrow-list" >
+                        <!-- <li><a href="#">Accusantium doloremque laudantium rem aperiam</a></li>
+                        <li><a href="#">Eaque ipsa quae ab illo inventore veritatis quasi</a></li>
+                        <li><a href="#">Architecto beatae vitae dicta sunt explicabo</a></li>
+                        <li><a href="#">Nemo enim ipsam voluptatem quia voluptas</a></li>
+                        <li><a href="#">Aspernatur aut odit aut fugit, sed quia consequuntur</a></li>
+                        <li><a href="#">Magni dolores eos qui ratione voluptatem sequi</a></li>
+                        <li><a href="#">Neque porro quisquam est qui dolorem ipsum quia</a></li> -->
+                                      </ul>
+                                  </div>
+                                      
+                                  
+                                 
+                                  
+                                      <div class="col-md-4">
+      
+                                          <h2 class="section-title"> Meetups</h2>
+                      
+                      <div class="photo-grid" >
+                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+                      </div>
+                                 
+                                      </div>
+                                  
                               </div>
-                            
-                            
-        </div>
+                                 
+      
+                </div>
+                </div>
+              
+            </main> <!-- .main-content -->
+      
 
 </body>
 
