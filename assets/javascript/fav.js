@@ -12,25 +12,37 @@ $(document).ready(function() {
     firebase.initializeApp(config);
 
     var database = firebase.database();
-
-    database.ref('/meetupFavs').on("child_added", function(snapshot) {
-        var sv = snapshot.val();
-
-        
-        console.log(sv.favMeetup.name);
-        //dont change this
-        var listings = $('.container');
-        
-
-       
-
-        
-        var details = $("<div>");
-        details.html(sv.favMeetup.name);
-
-        listings.append(details);
-
+    var email;
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          console.log("user signed in");
+          console.log(user.displayName);
+          email=user.email;
+          console.log(email);
+          database.ref('/meetupFavs').orderByChild('email').equalTo(email).on("child_added", function(snapshot) {
+            var sv = snapshot.val();
+            console.log(sv);
+            
+            console.log(sv.favMeetup.name);
+            //dont change this
+            var listings = $('.container');
+            
+    
+           
+    
+            
+            var details = $("<div>");
+            details.html("<p>"+sv.favMeetup.name+"</p>");
+    
+            listings.append(details);
+    
+        });
+        } else {
+          console.log("boo hoo. no user");
+        }
     });
+    
+    
     
 });
 
