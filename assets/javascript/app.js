@@ -294,32 +294,37 @@ function buildLocationList(data) {
 
        
 
-        var listing = $("<li>");
+        var listing = $("<div class='mb-4' >");
         listing.addClass('item');
         listing.attr("id","listing-" + i);
 
          //dont change this
          var listings = $('#listings');
          
-         var favButton = $("<p class='mx-1 my-1 star' data-toggle='modal' data-target='#myModal' >");
-         favButton.html('<i class="fas fa-star float-left"></i>');
-         favButton.attr("data-position",i);
-         listing.append(favButton);
+        
+        var favButton = $("<p class='mx-1 my-1 star' data-toggle='modal' data-target='#myModal' >");
+        favButton.html('<i class="fas fa-star float-left"></i>');
+        favButton.attr("data-position",i);
+        listing.append(favButton);
+
+        //you can display what ever else you want
+        var details = $("<h5 class='ml-1 my-0 '>");
+        details.html(prop.name);
+
+        listing.append(details);
+
+
+       
+
 
         //this is converting the address to a link. you can change it to what you want
         // dont change the rest of the code
-        var link = $('<a>');
+        var link = $('<a class="ml-2">');
         link.attr("href", '#');
         link.addClass("link");
         link.attr("data-position", i);
         link.html(prop.address);
         listing.append(link);
-
-        //you can display what ever else you want
-        var details = $("<div>");
-        details.html(prop.name);
-
-        listing.append(details);
 
         listings.append(listing);
         
