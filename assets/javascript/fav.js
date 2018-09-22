@@ -28,16 +28,27 @@ $(document).ready(function() {
               
               console.log(sv.favMeetup.name);
               //dont change this
-              var listings = $('.container');
+              var listings = $('#container');
               
+      
+              var favButton = $("<p class='mx-1 my-1 star' data-toggle='modal' data-target='#myModal' >");
+              favButton.html('<i class="fas fa-trash-alt float-left"></i>');
+             
+              listings.append(favButton);
+      
+              //you can display what ever else you want
+              var details = $("<h5 class='ml-1 my-0'>");
+              details.html(sv.favMeetup.name);
+              listings.append(details);
+              
+              var address = $("<p>");
+              address.html(sv.favMeetup.address);
+                listings.append(address);
+              
+            //   var details = $("<div>");
+            //   details.html("<p>"+sv.favMeetup.name+"</p>");
       
              
-      
-              
-              var details = $("<div>");
-              details.html("<p>"+sv.favMeetup.name+"</p>");
-      
-              listings.append(details);
       
           });
           } else {
