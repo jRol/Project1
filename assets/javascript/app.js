@@ -74,13 +74,15 @@ function displayMeetupAPI() {
 
     var queryURL = proxyURL + "https://api.meetup.com/find/upcoming_events?key=3f604954571041164226827581f6062&radius=30.0&lat=" + latitude + "&lon=" + longitude;
 
-    if (startDate === "T00:00:00" || endDate === "T23:59:59") {
+    if (mapInitiated) {
+        if (startDate === "T00:00:00" || endDate === "T23:59:59") {
 
-        queryURL = queryURL + "&topic_category=" + category;
-    }
-    else {
+            queryURL = queryURL + "&topic_category=" + category;
+        }
+        else {
 
-        queryURL = queryURL + "&topic_category=" + category + "&start_date_range=" + startDate + "&end_date_range=" + endDate;
+            queryURL = queryURL + "&topic_category=" + category + "&start_date_range=" + startDate + "&end_date_range=" + endDate;
+        }
     }
 
     console.log(queryURL);
