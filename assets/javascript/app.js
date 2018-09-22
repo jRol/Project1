@@ -299,6 +299,7 @@ function buildLocationList(data) {
 
          //dont change this
          var listings = $('#listings');
+         
          var favButton = $("<p class='mx-1 my-1 star' data-toggle='modal' data-target='#myModal' >");
          favButton.html('<i class="fas fa-star float-left"></i>');
          favButton.attr("data-position",i);
@@ -320,7 +321,7 @@ function buildLocationList(data) {
         listing.append(details);
 
         listings.append(listing);
-       
+        
         //dont change this
         $(document).on('click','.link' ,function(e){
             // Update the currentFeature to the store associated with the clicked link

@@ -16,12 +16,13 @@
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
     <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />   
     <script src="assets/javascript/app.js"></script>
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+    <script src="assets/javascript/fav.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
     
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  
     
 </head>
 
@@ -30,283 +31,167 @@
     
 
 
-        <div class="site-content">
-            <div class="site-header">
-              <div class="container">
-                  <div class="modal fade" id="myModal" role="dialog" >
-                      <div class="modal-dialog">
-                      
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                          <div class="modal-body">
-                            <p>Favorite Added</p>
-                          </div>
-                          
-                        </div>
+  <div class="site-content">
+    <div class="site-header">
+      <div class="container">
+        <div class="modal fade" id="myModal" role="dialog" >
+          <div class="modal-dialog">   
+            <div class="modal-content"> </div>
                         
-                      </div>
-                    </div>
-                <a href="index.html" class="branding">
-                  <!--img src="images/logo.png" alt="" class="logo"-->
-                  <div class="logo-type">
-                    <h1 class="site-title">Weather'd Plans</h1>
-                    <small class="site-description">WeatherProof your day</small>
-                  </div>
-                </a>
-      
-                <!-- Navigation -->
-                <div class="main-navigation">
-                  <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
-                  <ul class="menu">
-                    <li class="menu-item current-menu-item"><a href="landing.html">Home</a></li>
-                    <li class="menu-item"><a href="#">Main</a></li>
-                    
-                  </ul> <!-- .menu -->
-                </div> <!-- .main-navigation -->
-      
-                <div class="mobile-navigation"></div>
-      
+          </div>
+        </div>
+          <a href="index.html" class="branding">
+            <!--img src="images/logo.png" alt="" class="logo"-->
+              <div class="logo-type">
+                <h1 class="site-title">Weather'd</h1>
+                  <small class="site-description">WeatherProof your day</small>
               </div>
-            </div> <!-- .site-header -->
+          </a>
       
-            <div class="hero" >
-              <div class="container">
-                <!-- <form action="#" class="find-location">
-                  <input type="text" placeholder="Find your location...">
-                  <input type="submit" value="Find">
-                </form> -->
-                <div id='geocoder' class='geocoder'></div>
-                <div id='map' class='map'></div>
-             
-              </div>
-            </div>
-            <div class="forecast-table">
-              <div class="container">
-                <div class="forecast-container">
-                  <div class="today forecast">
-                    <div class="forecast-header">
-                      <div class="day">Monday</div>
-                      <div class="date">6 Oct</div>
-                    </div> <!-- .forecast-header -->
+            <!-- Navigation -->
+            <div class="main-navigation">
+              <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+                <ul class="menu">
+                  <li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
+                  <li class="menu-item"><a href="favorites.html">Favorites</a></li>
+                  <li class="menu-item"><a href="#">Sign Out</a></li>
+                </ul> <!-- .menu -->
+            </div> <!-- .main-navigation -->
+    </div> <!-- .site-header -->
+      
+  <div class="hero" > </div>
+
+  <div class="forecast-table">
+    <div class="container">
+      <div class="forecast-container">
+        <div id='geocoder' class='geocoder'></div>
+          <div id='map' class='map'></div>                   
+            <div class="today forecast">
+              <div class="forecast-header">
+                <div class="day">Monday</div>
+                  <div class="date">6 Oct</div>
+              </div> <!-- .forecast-header -->
                     <div class="forecast-content">
                       <div class="location">New York</div>
                       <div class="degree">
                         <div class="num">23<sup>o</sup>C</div>
-                        <div class="forecast-icon">
-                          <!--img src="assets/images/weather.sv" alt="" width=90-->
-                        </div>	
                       </div>
-                      <!--span><img src="images/icon-umberella.png" alt="">20%</span>
-                      <span><img src="images/icon-wind.png" alt="">18km/h</span>
-                      <span><img src="images/icon-compass.png" alt="">East</span-->
+                          <div class="forecast-icon">
+                            <img src="assets/images/placeholder.png" alt="" width=90-->
+                          </div>	
                     </div>
-                  </div>
-                  <div class="forecast">
-                    <div class="forecast-header">
-                      <div class="day">Tuesday</div>
-                    </div> <!-- .forecast-header -->
-                    <div class="forecast-content">
-                      <div class="forecast-icon">
-                        <!--img src="images/icons/icon-3.svg" alt="" width=48-->
-                      </div>
-                      <div class="degree">23<sup>o</sup>C</div>
-                      <small>18<sup>o</sup></small>
-                    </div>
-                  </div>
-                  <div class="forecast">
-                    <div class="forecast-header">
-                      <div class="day">Wednesday</div>
-                    </div> <!-- .forecast-header -->
-                    <div class="forecast-content">
-                      <div class="forecast-icon">
-                        <!--img src="images/icons/icon-5.svg" alt="" width=48-->
-                      </div>
-                      <div class="degree">23<sup>o</sup>C</div>
-                      <small>18<sup>o</sup></small>
-                    </div>
-                  </div>
-                  <div class="forecast">
-                    <div class="forecast-header">
-                      <div class="day">Thursday</div>
-                    </div> <!-- .forecast-header -->
-                    <div class="forecast-content">
-                      <div class="forecast-icon">
-                        <!--img src="images/icons/icon-7.svg" alt="" width=48-->
-                      </div>
-                      <div class="degree">23<sup>o</sup>C</div>
-                      <small>18<sup>o</sup></small>
-                    </div>
-                  </div>
-                  <div class="forecast">
-                    <div class="forecast-header">
-                      <div class="day">Friday</div>
-                    </div> <!-- .forecast-header -->
-                    <div class="forecast-content">
-                      <div class="forecast-icon">
-                        <!--img src="images/icons/icon-12.svg" alt="" width=48-->
-                      </div>
-                      <div class="degree">23<sup>o</sup>C</div>
-                      <small>18<sup>o</sup></small>
-                    </div>
-                  </div>
-                  <div class="forecast">
-                    <div class="forecast-header">
-                      <div class="day">Saturday</div>
-                    </div> <!-- .forecast-header -->
-                    <div class="forecast-content">
-                      <div class="forecast-icon">
-                        <!--img src="images/icons/icon-13.svg" alt="" width=48-->
-                      </div>
-                      <div class="degree">23<sup>o</sup>C</div>
-                      <small>18<sup>o</sup></small>
-                    </div>
-                  </div>
-                  <div class="forecast">
-                    <div class="forecast-header">
-                      <div class="day">Sunday</div>
-                    </div> <!-- .forecast-header -->
-                    <div class="forecast-content">
-                      <div class="forecast-icon">
-                        <!--img src="images/icons/icon-14.svg" alt="" width=48-->
-                      </div>
-                      <div class="degree">23<sup>o</sup>C</div>
-                      <small>18<sup>o</sup></small>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-          
-      
-              <div class="fullwidth-block" data-bg-color="#262936">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="news">
-                        <div class="date">06.10</div>
-                        <h3><a href="#">Top One Event </a></h3>
-                        <p><img src="assets/images/placeholder.png" alt="#"></p>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="news">
-                        <div class="date">06.10</div>
-                        <h3><a href="#">Top Two Event</a></h3>
-                        <p><img src="assets/images/placeholder.png" alt="#"></p>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                                          <div class="Meetup-event">
-                                                   
-                                                  <h3><img class="meetup-icon" src="assets/images/meetup2.jpg" style="width: 48px;height: 48px;"> Categories </a></h3>
-                                                  
-                                              
-                                          <div class="input-group mb-3">
-                                                  <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                      <input type="checkbox" aria-label="Checkbox for following text input">
-                                                    </div>
-                                                  </div>
-                                                  <!--input type="text" class="event-out" aria-label="Text input with checkbox"-->
-                                                </div>
-                                                <div class="input-group mb-3">
-                                                      <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                          <input type="checkbox" aria-label="Checkbox for following text input">
-                                                        </div>
-                                                      </div>
-                                                      <!--input type="text" class="event-out" aria-label="Text input with checkbox"-->
-                                                    </div>
-                                                    <div class="input-group mb-3">
-                                                          <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                              <input type="checkbox" aria-label="Checkbox for following text input">
-                                                            </div>
-                                                          </div>
-                                                          <!--input type="text" class="event-out" aria-label="Text input with checkbox"-->
-                                                        </div>
-                                                        <div class="input-group mb-3">
-                                                              <div class="input-group-prepend">
-                                                                <div class="input-group-text">
-                                                                  <input type="checkbox" aria-label="Checkbox for following text input">
-                                                                </div>
-                                                              </div>
-                                                              <!--input type="text" class="event-out" aria-label="Text input with checkbox"-->
-                                                            </div>
-                                                            <div class="input-group mb-3">
-                                                                  <div class="input-group-prepend">
-                                                                    <div class="input-group-text">
-                                                                      <input type="checkbox" aria-label="Checkbox for following text input">
-                                                                    </div>
-                                                                  </div>
-                                                                  <!--input type="text" class="event-out" aria-label="Text input with checkbox"-->
-                                                                </div>
-                                                                <div class="input-group mb-3">
-                                                                      <div class="input-group-prepend">
-                                                                        <div class="input-group-text">
-                                                                          <input type="checkbox" aria-label="Checkbox for following text input">
-                                                                        </div>
-                                                                      </div>
-                                                                      <!--input type="text" class="event-out" aria-label="Text input with checkbox"-->
-                                                                    </div>
-                                                                  </div>
-                                                                    
-                                                  
-                    </div>
-                  </div>
-                </div>
-              </div>
-      
-              <div class="fullwidth-block">
-                <div class="container">
-                  <div class="row">
-      
-                                  
-                    
-                    <div class="col-md-6">
-                                          
-                                                  
-                                      <h2 class="section-title">Meetup Events</h2>
-      
-                      <ul id="listings" class="arrow-list" >
-                        <!-- <li><a href="#">Accusantium doloremque laudantium rem aperiam</a></li>
-                        <li><a href="#">Eaque ipsa quae ab illo inventore veritatis quasi</a></li>
-                        <li><a href="#">Architecto beatae vitae dicta sunt explicabo</a></li>
-                        <li><a href="#">Nemo enim ipsam voluptatem quia voluptas</a></li>
-                        <li><a href="#">Aspernatur aut odit aut fugit, sed quia consequuntur</a></li>
-                        <li><a href="#">Magni dolores eos qui ratione voluptatem sequi</a></li>
-                        <li><a href="#">Neque porro quisquam est qui dolorem ipsum quia</a></li> -->
-                                      </ul>
-                                  </div>
-                                      
-                                  
-                                 
-                                  
-                                      <div class="col-md-4">
-      
-                                          <h2 class="section-title"> Meetups</h2>
                       
-                      <div class="photo-grid" >
-                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-                        <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-                      </div>
-                                 
-                                      </div>
-                                  
-                              </div>
-                                 
-      
-                </div>
-                </div>
+      </div>
+    </div>                 
+  </div>
+  
+  <div class="fullwidth-block" data-bg-color="#262936">
+    <div class="container">
+      <div class="row">
+        <div class="date-range col-md-4">             
+          <div class="news">
+            <input type="date" class="location-verify form-control form-control-lg" placeholder="">
+            <input type="date" class="location-verify form-control form-control-lg" placeholder="">
+            <button type="submit" class="btn btn-block btn-lg btn-info">Confirm</button>
+              <div class="date">From:<br> 
+                To:
+              </div>
+                <!--h3><a href="#">Top One Event </a></h3>
+                  <p><img src="assets/images/placeholder.png" alt="#"></p>
+              </div-->
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div id="meetup-cat">
+            <h3><img class="meetup-icon" src="assets/images/meetup2.jpg" style="width: 60px;height: 60px;"><select id="select">
+                <option value="default"> <p class="word">Categories</p></option>
+
+              </select></a></h3>
+              <!--div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width: 75%"><img class="meetup-icon" src="assets/images/meetup2.jpg" style="width: 60px;height: 60px"><p class="word"> Categories</p></a>
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" id="test"></a></li>
+                  
+
+                </ul-->
+
+                
+              </div>
+          </div>
+        </div>                                
+      </div>
+    </div>
+  </div>
+   
+  <div class="fullwidth-block">
+    <div class="container">
+        <div class="tab">
+            <button class=" h2 section-title tablinks" onclick="openCity(event, 'listings')">Meetup Events</button>
+            <button class="h2 section-title tablinks" onclick="openCity(event, 'meet-photo')">Meetups</button>
+            
+          </div>
+
+        
+            
+           
+
+      <div class="row">
+        <div class="meet-list col-md">
+          
+            <div id="listings" class="tabcontent arrow-list" > </div>
+        </div>
+        <div class="meet-pic col-md">
+         
+            <div id="meet-photo"  class="tabcontent photo-grid">
+              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
               
             </main> <!-- .main-content -->
+
+            <script>
+              var select = document.getElementById("select"),
+                arr = ["html", "css","java","php"];
+              for(var i=0; i < arr.length; i++)
+              { 
+                var option = document.createElement("OPTION"),
+                txt = document.createTextNode(arr[i]);
+                option.appendChild(txt);
+                option.setAttribute ("value", arr[i]);
+                select.insertBefore(option,select.lastChild);
+
+              }
+
+              function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+            </script>
+           
+                
       
 
 </body>
