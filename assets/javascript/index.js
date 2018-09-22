@@ -1,21 +1,31 @@
-var latitude, longitude;
+var latitude, longitude,token="false";
 
 $(document).ready(function() {
     
     sessionStorage.clear();
     geoLoc();
        
-
     $("#confirm").on("click", function(){
-        
-        if(longitude && latitude) {
-            // Store all content into sessionStorage
-            sessionStorage.setItem("longitude", longitude);
-            sessionStorage.setItem("latitude", latitude);
-            window.location.href = "main.html";
+        console.log(token);
+        if(token === "false") {
+            console.log("signing in");
+            signIn();
+        } else {
+            console.log("here i am");
+            alert("hello");
+            if(longitude && latitude) {
+                // Store all content into sessionStorage
+                sessionStorage.setItem("longitude", longitude);
+                sessionStorage.setItem("latitude", latitude);
+                window.location.href = "main.html";
+                
+ 
+            }
         }
         
+        
     });
+    
 });
 
 function geoLoc() {
@@ -68,6 +78,7 @@ function getCurrentLocation (position) {
     });
     
 }
+
 function signIn() {
     var config = {
         apiKey: "AIzaSyC9pE2ORuZUcAnZM_4fnUDSScgurVLBbN8",

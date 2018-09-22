@@ -7,6 +7,7 @@ var groupCount = 0; */
 var events = {};
 var map;
 var mapInitiated=false;
+var email;
 
 
 $(document).ready(function() {
@@ -23,7 +24,15 @@ $(document).ready(function() {
         
     longitude=sessionStorage.getItem("longitude");
     latitude=sessionStorage.getItem("latitude");
-    
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          console.log("user signed in");
+          console.log(user.displayName);
+          email=user.email;
+        } else {
+          console.log("boo hoo. no user");
+        }
+    });
     console.log(mapInitiated);
     displayMeetupAPI();
     
@@ -37,8 +46,9 @@ $(document).on("click",'.star',function(){
     console.log(favMeetup.properties);
     
     var database = firebase.database();
-
+    sessionStorage.setItem("email", email);
     database.ref('/meetupFavs').push({
+        email: email,
         favMeetup: favMeetup.properties
     });
     
