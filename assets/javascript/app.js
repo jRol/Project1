@@ -1,4 +1,4 @@
-var latitude,longitude,category;
+var latitude, longitude, category, startDate, endDate;
 
 // TESTING PURPOSES: Counter variables tracking number of events with a venue property and those with only a group property
 /* var venueCount = 0;
@@ -71,7 +71,17 @@ function displayMeetupAPI() {
         console.log(longitude);
     var proxyURL = "https://cors-anywhere.herokuapp.com/";
     //var proxyURL="https://secret-ocean-49799.herokuapp.com/";
-    var queryURL = proxyURL + "https://api.meetup.com/find/upcoming_events?key=3f604954571041164226827581f6062&radius=30.0&lat=" + latitude + "&lon=" + longitude + "&topic_category=" + category;
+
+    var queryURL = proxyURL + "https://api.meetup.com/find/upcoming_events?key=3f604954571041164226827581f6062&radius=30.0&lat=" + latitude + "&lon=" + longitude;
+
+    if (startDate === "T00:00:00" || endDate === "T23:59:59") {
+
+        queryURL = queryURL + "&topic_category=" + category;
+    }
+    else {
+
+        queryURL = queryURL + "&topic_category=" + category + "&start_date_range=" + startDate + "&end_date_range=" + endDate;
+    }
 
     console.log(queryURL);
 
@@ -382,13 +392,30 @@ function getCategories() {
 
         $("#confirm").on("click", function() {
 
+            $("#start-date").removeClass("is-invalid");
+
             console.log(category);
             
+            // Set category value to selected option in #categories-drop
             var categories = document.getElementById("categories-drop");
             var selectedValue = categories.options[categories.selectedIndex].value;
             category = selectedValue;
+
+            // Set startDate and endDate values to input of #start-date and #end-date
+            startDate = $("#start-date").val().trim() + "T00:00:00";
+            endDate = $("#end-date").val().trim() + "T23:59:59";
+
+            // if validateDateTime(startDate, endDate) is false display validation error message, else run displayMeetupAPI()
+            if (!validateDateTime(startDate, endDate)) {
+
+                $("#start-date").addClass("is-invalid");
+            }
+            else {
+
+                displayMeetupAPI();  
+            }
             
-            displayMeetupAPI();
+          /*   displayMeetupAPI(); */
            /*  if (selectedValue === "choose") {
 
                 console.log("Please select a category type");
@@ -402,4 +429,16 @@ function getCategories() {
             console.log(category);
         });
     });
+}
+
+function validateDateTime(start, end) {
+
+    if (start === "T00:00:00" || end === "T23:59:59") {
+
+        return true;
+    }
+    else {
+
+        return new Date(end) > new Date(start);
+    } 
 }

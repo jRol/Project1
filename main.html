@@ -91,9 +91,10 @@
       <div class="row">
         <div class="date-range col-md-4">             
           <div class="news">
-            <input type="date" class="location-verify form-control form-control-lg" placeholder="">
-            <input type="date" class="location-verify form-control form-control-lg" placeholder="">
+            <input id="start-date" type="date" class="location-verify form-control form-control-lg" placeholder="">
+            <input id="end-date" type="date" class="location-verify form-control form-control-lg" placeholder="">
             <button id="confirm" type="submit" class="btn btn-block btn-lg btn-info">Confirm</button>
+            <div class="invalid-feedback">Start Date must come before End Date</div>
               <div class="date">From:<br> 
                 To:
               </div>
