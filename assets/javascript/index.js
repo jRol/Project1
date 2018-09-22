@@ -1,4 +1,4 @@
-var latitude, longitude,token="false";
+var latitude, longitude,token="true";
 
 $(document).ready(function() {
     

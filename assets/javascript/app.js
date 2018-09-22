@@ -11,6 +11,7 @@ var email;
 
 
 $(document).ready(function() {
+    getCategories();
 
     var config = {
         apiKey: "AIzaSyC9pE2ORuZUcAnZM_4fnUDSScgurVLBbN8",
@@ -382,6 +383,7 @@ function getCategories() {
             var selectedValue = categories.options[categories.selectedIndex].value;
             category = selectedValue;
             
+            displayMeetupAPI();
            /*  if (selectedValue === "choose") {
 
                 console.log("Please select a category type");

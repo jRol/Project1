@@ -93,7 +93,7 @@
           <div class="news">
             <input type="date" class="location-verify form-control form-control-lg" placeholder="">
             <input type="date" class="location-verify form-control form-control-lg" placeholder="">
-            <button type="submit" class="btn btn-block btn-lg btn-info">Confirm</button>
+            <button id="confirm" type="submit" class="btn btn-block btn-lg btn-info">Confirm</button>
               <div class="date">From:<br> 
                 To:
               </div>
@@ -105,10 +105,16 @@
         
         <div class="col-md-6">
           <div id="meetup-cat">
-            <h3><img class="meetup-icon" src="assets/images/meetup2.jpg" style="width: 60px;height: 60px;"><select id="select">
+              <div id="categories">
+                  <select id="categories-drop" class="custom-select">
+                      <option selected value="">Choose a Category...</option>
+                      
+                  </select>
+              </div>
+           <!--  <h3><img class="meetup-icon" src="assets/images/meetup2.jpg" style="width: 60px;height: 60px;"><select id="select">
                 <option value="default"> <p class="word">Categories</p></option>
 
-              </select></a></h3>
+              </select></a></h3> -->
               <!--div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width: 75%"><img class="meetup-icon" src="assets/images/meetup2.jpg" style="width: 60px;height: 60px"><p class="word"> Categories</p></a>
                 <span class="caret"></span></button>
