@@ -1,3 +1,132 @@
+#listings{
+  width:450px;
+    height:300px;
+  overflow-y:scroll;
+}
+
+#map {
+  width: 690px;
+  height: 500px;
+}
+
+#meetup-cat {
+  
+  margin-left: 75px;
+
+  
+}
+
+.meet-pic {
+  
+  margin-right: 300px;
+}
+
+.meet-list {
+  right: -100px;
+  
+
+}
+
+.word {
+  font-size: 20px;
+  margin-left: 45px;
+}
+
+.date-range {
+  margin-left: 145px;
+
+}
+
+.tab {
+  overflow: hidden;
+  /**border: 1px solid #ccc;**/
+  background-color: #7780a5;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #4d5d9b;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s;
+}
+
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+/**table appearance**/
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+  color: white;
+  
+ 
+
+}
+
+#table-name {
+ color: white;
+ font-size: 30px;
+}
+
+td, th {
+  border: 1px solid #ffffff;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #ffffff;
+  color: darkgray;
+}
+
+.fav-page{
+position: relative;
+background: url("../images/dc-night.jpg") no-repeat center center;
+background-size: cover;
+padding-top: 300px;
+padding-bottom: 500px;
+padding-left:200px;
+
+
+}
+
+
+
+
+
+
 
 
 header,
@@ -88,7 +217,9 @@ html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
-  cursor: pointer; }
+  cursor: pointer;
+ 
+}
 
 button[disabled],
 input[disabled] {
@@ -139,7 +270,9 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   margin: 0 0 20px;
-  line-height: normal; }
+  line-height: normal; 
+  
+}
 
 hr {
   border: none;
@@ -443,7 +576,7 @@ form textarea {
     content: " ";
     width: 12px;
     height: 7px;
-    background: url(images/arrow.png);
+    /*background: url(images/arrow.png);*/
     display: block; }
   .news .date {
     position: absolute;
@@ -461,7 +594,7 @@ form textarea {
 
 
 .arrow-list {
-  list-style-image: url(images/arrow.png);
+  /*list-style-image: url(images/arrow.png);*/
   list-style-position: inside; }
   .arrow-list li {
     padding: 10px 0;
