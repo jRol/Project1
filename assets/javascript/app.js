@@ -1,4 +1,4 @@
-var latitude,longitude;
+var latitude,longitude,category;
 
 // TESTING PURPOSES: Counter variables tracking number of events with a venue property and those with only a group property
 /* var venueCount = 0;
@@ -70,7 +70,7 @@ function displayMeetupAPI() {
         console.log(longitude);
     var proxyURL = "https://cors-anywhere.herokuapp.com/";
     //var proxyURL="https://secret-ocean-49799.herokuapp.com/";
-    var queryURL = proxyURL + "https://api.meetup.com/find/upcoming_events?key=3f604954571041164226827581f6062&radius=30.0&lat=" + latitude + "&lon=" + longitude;
+    var queryURL = proxyURL + "https://api.meetup.com/find/upcoming_events?key=3f604954571041164226827581f6062&radius=30.0&lat=" + latitude + "&lon=" + longitude + "&topic_category=" + category;
 
     console.log(queryURL);
 
@@ -349,4 +349,50 @@ function buildLocationList(data) {
 
         
     }
+}
+
+function getCategories() {
+
+    var proxyURL = "https://cors-anywhere.herokuapp.com/";
+    var queryURL = proxyURL + "https://api.meetup.com/find/topic_categories?key=3f604954571041164226827581f6062";
+
+    // Creating an AJAX call for Meetup API
+    $.ajax({
+    url: queryURL,
+    method: "GET"
+    }).then(function(response) {
+
+        console.log(category);
+        // Logging original response object that is coming over from Meetup API
+        console.log(response);
+
+        for (var i = 0; i < response.length; i++) { 
+
+            var newCategory = $("<option>");
+            newCategory.attr("value", response[i].id);
+            newCategory.text(response[i].name);
+            $("#categories-drop").append(newCategory);
+        }
+
+        $("#confirm").on("click", function() {
+
+            console.log(category);
+            
+            var categories = document.getElementById("categories-drop");
+            var selectedValue = categories.options[categories.selectedIndex].value;
+            category = selectedValue;
+            
+           /*  if (selectedValue === "choose") {
+
+                console.log("Please select a category type");
+                category = selectedValue;
+            }
+            else {
+
+                console.log(selectedValue);
+                category = selectedValue;
+            } */
+            console.log(category);
+        });
+    });
 }
