@@ -115,23 +115,25 @@ tr:nth-child(even) {
 }
 
 .fav-page{
-position: relative;
-background: url("../images/dc-night.jpg") no-repeat center center;
-background-size: cover;
-padding-top: 300px;
-padding-bottom: 500px;
-padding-left:200px;
-
-
-}
-
-#fav-bac{
-  background-color: white;
+  position: relative;
+  background: url("../images/dc-night.jpg") no-repeat center center;
   background-size: cover;
-  width:auto;
-  height: auto;
-  margin-right:150px;
-}
+  padding-top: 100px;
+  padding-bottom: 300px;
+  padding-left:200px;
+  padding-right:200px;
+  
+  }
+  
+  #container{
+    background-color: white;
+    /* background-size: cover; */
+    width:auto;
+    height: 600px;
+    color: black;
+    overflow-y: scroll;
+    opacity: 0.8;
+  }
 
 
 /*listing icon and text*/
