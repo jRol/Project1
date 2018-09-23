@@ -5,7 +5,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project #1</title>
+    <title>Weather'd</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -16,8 +16,7 @@
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
     <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />   
     <script src="assets/javascript/app.js"></script>
-    <!--script src="assets/javascript/fav.js"></script-->
-    <!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script--> 
+    <script src="assets/javascript/signout.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -35,11 +34,7 @@
   <div class="site-content">
     <div class="site-header">
       <div class="container">
-        <div class="modal fade" id="myModal" role="dialog" >
-          <div class="modal-dialog">   
-            <div class="modal-content"> </div>                        
-          </div>
-        </div>
+       
 
         <a href="index.html" class="branding">
         <!--img  src="assets/images/logo_transparent.png" alt="" class="logo" style="width: 200px; height: 200px"-->
@@ -56,7 +51,7 @@
             <ul class="menu">
               <li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
               <li class="menu-item"><a href="favorites.html">Favorites</a></li>
-              <li class="menu-item"><a href="#">Sign Out</a></li>
+              <li id="signout" class="menu-item"><a href="index.html">Sign Out</a></li>
             </ul> <!-- .menu -->
         </div> <!-- .main-navigation -->
 
@@ -79,9 +74,8 @@
                   <div class="degree">
                     <div class="num"><span id="temp"></span></div>
                  </div><!--.degree-->
-                  <div class="forecast-icon"> 
-                    <img src="assets/images/weather-pic.png" alt="" width=90>
-                    <!--i id="snowflake" class="fas fa-snowflake" alt="snowflake"></i-->
+                  <div id="icon" > 
+                    
                   </div>	                         
               </div><!--.forecast-content-->
             </div><!--.today forecast-->                      
@@ -89,9 +83,10 @@
     </div>                 
   </div><!--.forecast-table-->
   
-  <div class="fullwidth-block" data-bg-color="#262936">
+  <div data-bg-color="#262936">
     <div class="container">
-      <div class="row">
+
+      <!-- <div class="row">
         <div class="date-range col-md-4">             
           <div class="news">
             <input id="start-date" type="date" class="location-verify form-control form-control-lg" placeholder="">
@@ -103,11 +98,9 @@
                 To:
               </div>
 
-                <!--h3><a href="#">Top One Event </a></h3>
-                <p><img src="assets/images/placeholder.png" alt="#"></p>
-              </div--><!--.invalid-feedback-->
-          </div><!--.news-->
-        </div><!--.date-range-->
+               
+          </div>
+        </div>
         
         <div class="col-md-6">
           <div id="meetup-cat">
@@ -118,16 +111,56 @@
                   </select>
                 </div>
                 
-              </div><!--#categories-->                          
-          </div><!--#meetup-cat-->
-        <!--/div-->
-      </div>                                
+              </div>                          
+          </div>
+       
+      </div>    -->
+      
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+           <form class="form-inline justify-content-center">
+              <div class="form-group">
+                  <label class="date mr-2" for="start-date">To</label>
+                  <input id="start-date" type="date" class="mr-2 location-verify form-control form-control-lg" placeholder="">
+              </div>
+              <div class="form-group">
+                  <label class="date mr-2" for="end-date">From</label>
+                  <input id="end-date" type="date" class=" mr-2 location-verify form-control form-control-lg" placeholder="">
+              </div>
+              <div class="invalid-feedback">Start Date must come before End Date</div>
+              
+              <div id="categories">
+                  <select id="categories-drop" class="mr-2 form-control form-control-lg">
+                      <option selected value="">Choose a Category...</option>
+                      
+                  </select>
+              </div>
+              <button id="confirm" type="submit" class="btn btn-lg btn-info mx-0 my-0">
+                Confirm</button>
+           
+                                
+            </form>    
+          </div>
+      </div> 
     </div>
   </div><!--fullwidth-block-->
   </div>
    
   <div class="fullwidth-block">
     <div class="container">
+        <div class="modal fade" id="myModal" role="dialog" >
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-body">
+                      <p>Favorite Added</p>
+                    </div>
+                  
+                </div>
+              
+            </div>
+        </div>
         <div class="tab">
             <button  class=" h2 section-title tablinks" onclick="openCity(event, 'listings')" id="defaultOpen">Meetup Events</button>
             <button class="h2 section-title tablinks" onclick="openCity(event, 'meet-photo')">Meetups</button>
@@ -155,7 +188,7 @@
     </div>
   </div>
               
-            <!--/main> <!-- .main-content -->
+       
 
   <script>
               document.getElementById("defaultOpen").click();

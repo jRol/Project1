@@ -1,7 +1,15 @@
-var latitude, longitude,token="true";
+var latitude, longitude,token="false";
 
 $(document).ready(function() {
-    
+    var config = {
+        apiKey: "AIzaSyC9pE2ORuZUcAnZM_4fnUDSScgurVLBbN8",
+        authDomain: "gwbootcamp-97ba0.firebaseapp.com",
+        databaseURL: "https://gwbootcamp-97ba0.firebaseio.com",
+        projectId: "gwbootcamp-97ba0",
+        storageBucket: "gwbootcamp-97ba0.appspot.com",
+        messagingSenderId: "454079581913"
+        };
+    firebase.initializeApp(config);
     sessionStorage.clear();
     geoLoc();
        
@@ -22,8 +30,18 @@ $(document).ready(function() {
  
             }
         }
-        
-        
+        // firebase.auth().onAuthStateChanged(function(user) {
+        //     if (user) {
+        //         if(longitude && latitude) {
+        //             // Store all content into sessionStorage
+        //             sessionStorage.setItem("longitude", longitude);
+        //             sessionStorage.setItem("latitude", latitude);
+        //             window.location.href = "main.html";
+        //         }
+        //     } else {
+        //         signIn();
+        //     }
+        // });
     });
     
 });
@@ -80,15 +98,7 @@ function getCurrentLocation (position) {
 }
 
 function signIn() {
-    var config = {
-        apiKey: "AIzaSyC9pE2ORuZUcAnZM_4fnUDSScgurVLBbN8",
-        authDomain: "gwbootcamp-97ba0.firebaseapp.com",
-        databaseURL: "https://gwbootcamp-97ba0.firebaseio.com",
-        projectId: "gwbootcamp-97ba0",
-        storageBucket: "gwbootcamp-97ba0.appspot.com",
-        messagingSenderId: "454079581913"
-        };
-    firebase.initializeApp(config);
+   
     var provider = new firebase.auth.GoogleAuthProvider();
 
     firebase.auth().signInWithPopup(provider).then(function(result) {
