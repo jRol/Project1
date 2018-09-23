@@ -331,7 +331,7 @@ function buildLocationList(data) {
 
         //this is converting the address to a link. you can change it to what you want
         // dont change the rest of the code
-        var link = $('<a class="ml-2">');
+        var link = $('<a id="star-icon" class="ml-2">');
         link.attr("href", '#');
         link.addClass("link");
         link.attr("data-position", i);
