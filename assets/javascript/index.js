@@ -32,6 +32,7 @@ $(document).ready(function() {
         //     }
         // }
         firebase.auth().onAuthStateChanged(function(user) {
+            console.log("in auth");
             if (user) {
                 if(longitude && latitude) {
                     // Store all content into sessionStorage
