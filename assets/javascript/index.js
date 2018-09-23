@@ -40,6 +40,7 @@ $(document).ready(function() {
                     window.location.href = "main.html";
                 }
             } else {
+                console.log("signing in");
                 signIn();
             }
         });
@@ -99,7 +100,7 @@ function getCurrentLocation (position) {
 }
 
 function signIn() {
-   
+    console.log("in sign in");
     var provider = new firebase.auth.GoogleAuthProvider();
 
     firebase.auth().signInWithPopup(provider).then(function(result) {
@@ -119,6 +120,7 @@ function signIn() {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
+        console.log(errorMessage);
         // The email of the user's account used.
         var email = error.email;
         // The firebase.auth.AuthCredential type that was used.
