@@ -705,7 +705,7 @@ label {
     .photo .photo-title a {
       color: white; }
 
-.active {
+.active, .modal-body {
   color: black;
 }
 
