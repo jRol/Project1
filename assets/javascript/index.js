@@ -16,33 +16,33 @@ $(document).ready(function() {
        
     $("#confirm").on("click", function(){
         console.log(token);
-        if(token === "false") {
-            console.log("signing in");
-            signIn();
-        } else {
-            console.log("here i am");
-            alert("hello");
-            if(longitude && latitude) {
-                // Store all content into sessionStorage
-                sessionStorage.setItem("longitude", longitude);
-                sessionStorage.setItem("latitude", latitude);
-                window.location.href = "main.html";
+        // if(token === "false") {
+        //     console.log("signing in");
+        //     signIn();
+        // } else {
+        //     console.log("here i am");
+        //     alert("hello");
+        //     if(longitude && latitude) {
+        //         // Store all content into sessionStorage
+        //         sessionStorage.setItem("longitude", longitude);
+        //         sessionStorage.setItem("latitude", latitude);
+        //         window.location.href = "main.html";
                 
  
-            }
-        }
-        // firebase.auth().onAuthStateChanged(function(user) {
-        //     if (user) {
-        //         if(longitude && latitude) {
-        //             // Store all content into sessionStorage
-        //             sessionStorage.setItem("longitude", longitude);
-        //             sessionStorage.setItem("latitude", latitude);
-        //             window.location.href = "main.html";
-        //         }
-        //     } else {
-        //         signIn();
         //     }
-        // });
+        // }
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                if(longitude && latitude) {
+                    // Store all content into sessionStorage
+                    sessionStorage.setItem("longitude", longitude);
+                    sessionStorage.setItem("latitude", latitude);
+                    window.location.href = "main.html";
+                }
+            } else {
+                signIn();
+            }
+        });
     });
     
 });
