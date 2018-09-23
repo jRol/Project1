@@ -1,4 +1,5 @@
-var latitude, longitude, category, startDate, endDate;
+var latitude, longitude;
+var category, startDate="T00:00:00", endDate="T23:59:59";
 
 // TESTING PURPOSES: Counter variables tracking number of events with a venue property and those with only a group property
 /* var venueCount = 0;
@@ -11,7 +12,10 @@ var email;
 
 
 $(document).ready(function() {
+    longitude=sessionStorage.getItem("longitude");
+    latitude=sessionStorage.getItem("latitude");
     getCategories();
+    getWeather();
 
     var config = {
         apiKey: "AIzaSyC9pE2ORuZUcAnZM_4fnUDSScgurVLBbN8",
@@ -23,8 +27,7 @@ $(document).ready(function() {
         };
     firebase.initializeApp(config);
         
-    longitude=sessionStorage.getItem("longitude");
-    latitude=sessionStorage.getItem("latitude");
+    
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           console.log("user signed in");
@@ -123,9 +126,6 @@ function displayMeetupAPI() {
 
             if (response.events[i].hasOwnProperty("venue") && response.events[i].venue.lon != 0) {
 
-                // TESTING PURPOSES: Counter var tracking number of events with a venue property
-                /* venueCount++; */
-
                 event.geometry.coordinates.push(response.events[i].venue.lon);
                 event.geometry.coordinates.push(response.events[i].venue.lat);
                 event.properties.name = response.events[i].name;
@@ -135,12 +135,7 @@ function displayMeetupAPI() {
 
                 events.features.push(event);
             }
-            else {
-
-                // TESTING PURPOSES: Counter var tracking number of events with only a group property
-                /* groupCount++; */
-
-                
+            else { 
                 event.geometry.coordinates.push(response.events[i].group.lon);
                 event.geometry.coordinates.push(response.events[i].group.lat);
                 event.properties.name = response.events[i].name;
@@ -156,27 +151,13 @@ function displayMeetupAPI() {
             updateMap();
         else   
             renderMap();
-        
-
-        // TESTING PURPOSES: Logging counter variables for events with a venue property and those with only a group property
-        /* console.log(venueCount);
-        console.log(groupCount); */
-
-        // Logging final events object, so that you can compare to original logging of response object
-        console.log(events);
     });
 }
 
-// Button added for testing purposes, so that you can run the AJAX call to Meetup API
-//$(document).on("click", "#get-res", displayMeetupAPI);
+
 
 var renderMap = function () {
     
-    // database().ref('/sessionData').once("value", function(snapshot) {
-    //         ref.child(snapshot.key).remove();
-            
-    // });
-
     mapboxgl.accessToken = 'pk.eyJ1IjoiYWlzaHRpYXEiLCJhIjoiY2psdnBtY2VvMDUyMTNxcXN0ZGJwcjd2YiJ9.jiV57t9pdOYOb8iJc_xABg';
     map = new mapboxgl.Map({
         container: 'map', // container id
@@ -189,8 +170,8 @@ var renderMap = function () {
     var geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken
     });
-    //$('#geocoder').append(geocoder.onAdd(map));
-    //document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+    
+    
     map.addControl(geocoder);
     geocoder.on('result', function(ev) {
         events = {};
@@ -228,7 +209,7 @@ function updateMap(){
     console.log(events);
 
     clearMap();
-    
+    getWeather();
     map.getSource('places').setData(events);
     
     //create the Markters
@@ -252,6 +233,7 @@ function displayMarkers(events) {
         var el = document.createElement('div');
         el.innerHTML="<i class='fas fa-map-marker-alt fa-2x'>";
         el.setAttribute("class","marker");
+        
                 
         new mapboxgl.Marker(el)
             .setLngLat(marker.geometry.coordinates)
@@ -265,15 +247,15 @@ function displayMarkers(events) {
             createPopUp(marker);
     
             // 3. Highlight listing in sidebar (and remove highlight for all other listings)
-            // var activeItem = document.getElementsByClassName('active');
+            var activeItem = document.getElementsByClassName('active');
     
-            // e.stopPropagation();
-            // if (activeItem[0]) {
-            //    activeItem[0].classList.remove('active');
-            // }
+            e.stopPropagation();
+            if (activeItem[0]) {
+               activeItem[0].classList.remove('active');
+            }
     
-            // var listing = document.getElementById('listing-' + i);
-            // listing.classList.add('active');
+            var listing = document.getElementById('listing-' + i);
+            listing.classList.add('active');
     
         });
     });
@@ -353,12 +335,12 @@ function buildLocationList(data) {
             createPopUp(clickedListing);
         
             // 3. Highlight listing in sidebar (and remove highlight for all other listings)
-            // var activeItem = document.getElementsByClassName('active');
+            var activeItem = document.getElementsByClassName('active');
         
-            // if (activeItem[0]) {
-            // activeItem[0].classList.remove('active');
-            // }
-            // this.parentNode.classList.add('active');
+            if (activeItem[0]) {
+            activeItem[0].classList.remove('active');
+            }
+            this.parentNode.classList.add('active');
         
          });
 
@@ -443,4 +425,39 @@ function validateDateTime(start, end) {
 
         return new Date(end) > new Date(start);
     } 
+}
+
+function getWeather() {
+
+    var APIKey = "9cf07e60efb34da49a4496096daf288b";
+    var queryURL="https://api.openweathermap.org/data/2.5/weather?lat="+latitude + "&lon=" + longitude + "&APPID=" + APIKey+"&units=imperial";
+    console.log(queryURL);
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+        }).then(function(response) {
+             
+        console.log(response.main.temp+"F");
+        $("#temp").html(parseInt(response.main.temp)+"<sup>o</sup>F");
+        $("#location").html("<h1>"+response.name+"</h1>");
+
+        var d = new Date();
+        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        $("#day").html(days[d.getDay()]);
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        $("#date").html(months[d.getMonth()] +" "+dd+", "+yyyy);
+        
+        var iconCode = response.weather[0].icon;
+        var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+        $("#icon").html("<img src='" + iconUrl  + "' class='img-fluid w-25'>");
+        $("#icon").prepend("<p>"+response.weather[0].main+"</p>");
+ 
+            
+    });  
 }

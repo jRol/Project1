@@ -644,7 +644,9 @@ form textarea {
     .news h3 a {
       color: white; }
 
-
+label {
+  font-size: 24px;
+}
 
 .arrow-list {
   /*list-style-image: url(images/arrow.png);*/
@@ -694,8 +696,8 @@ form textarea {
     .photo .photo-title a {
       color: white; }
 
-
-
-
+.active {
+  color: black;
+}
 
 
