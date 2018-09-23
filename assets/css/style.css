@@ -55,6 +55,7 @@ h3 {
     font-weight:bolder;
     margin-left: 250px;
     align-content: center;
+    padding-top:75px;
     
 
   
@@ -103,13 +104,13 @@ header.masthead {
  }
 .features-icons {
     background-color:  rgb(255, 255, 255);
-    
+    padding-top: 20px;
 
 }
 
 #confirm {
     background-color: #384374;
-    color: #bfc1c8;
+    color: white;
     font-size: 20px;
     
     width:200px;
