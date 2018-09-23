@@ -3,6 +3,7 @@
 body{
     background-color:  #262936;
     
+    
   
 
 }
@@ -11,9 +12,11 @@ body{
     color: #bfc1c8;
     font-size:18px;
     padding-right: 450px;
-    opacity: 0.80;
+    
+   
 
 }
+
 
 h1 {
     font-size: 35px;
@@ -23,6 +26,7 @@ h1 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     /**margin-top: 100px;*/
     justify-content: center;
+   
  
 }
 
@@ -42,12 +46,31 @@ h3 {
 }
 
 #out {
-    color: white;
+    color: dark rgb(68, 62, 62);
     font-size: 25px;
+    text-align: center;
+    justify-content: center;
+    margin-right:150px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight:bolder;
+    margin-left: 250px;
+    align-content: center;
+    
+
+  
+    
 }
 
 #geocoderLanding{
-    margin-left: 100px;
+    margin-left: 300px;
+    height: 140px;
+    padding-top: 100px;
+    align-content: center;
+
+}
+#loc-search {
+    align-content: center;
+
 
 }
 
@@ -63,11 +86,12 @@ header.masthead {
     
   }
 
-  .map-confirm{
+  /*.map-confirm{
       padding-top: 300px;
-      padding-left:135px;
+      padding-left: 135px;
+      
      
-  }
+  }*/
 
  .meetup {
      padding-left: 50px;
@@ -79,6 +103,7 @@ header.masthead {
  }
 .features-icons {
     background-color:  rgb(255, 255, 255);
+    
 
 }
 
@@ -86,7 +111,25 @@ header.masthead {
     background-color: #384374;
     color: #bfc1c8;
     font-size: 20px;
-    opacity: 0.80;
+    
+    width:200px;
+   
+
+}
+
+.text-left {
+    margin-left:315px;
+    padding-top: 10px;
+    
+    
+}
+
+#overall {
+
+  padding-top:150px;
+  margin-left:150px;
+ 
+  align-content: center;
 
 }
 

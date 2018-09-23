@@ -33,81 +33,85 @@
           
     
 
-        <nav class="navbar   static-top">
-                <div class="container">
-                  <a class="navbar">Weather'd</a>
-                  <!--a class="sign-in btn btn-primary" href="#">Sign In</a-->
-                </div>
-              </nav>
+  <nav class="navbar   static-top">
+    <div class="container">
+      <a class="navbar">Weather'd<!--img  src="assets/images/logo_transparent.png" alt="" class="logo" style="width: 200px; height: 200px"--></a>        
+    </div>
+  </nav>
 
-        <!-- Masthead -->
-    <header class="masthead  text-center">
-        <!-- <div class="overlay"></div> -->
-        <div class="container">
-            <div class="row">
-                <div class=" col-xl-12 mx-auto">
-                  <h1 class="mb-5">Don't be a Shut In, WeatherProof your day! </h1>
-                  <h3 class="define">Find a new Meetup regardless of the Weather!</h3>
-                  <!--p ><button class="loc-but" onclick="geoFindMe()">Show my location</button></p-->
-                  <div id="out" class="map-confirm"> <div >Current location: <span id="currLoc"></span></div></div>
-                  <!--img class="note" src="assets/images/notepad2.jpg" width="350" height="300"-->
-                 
-                </div>  
-            </div>
-            <div class="row">
-                <div class="map-confirm col-md-12 mx-auto">
-                  <!-- <form> -->
-                    <div class="row">
-                      <div class="col-md-9 align-right">
-                        <div id='geocoderLanding' ></div>
-                      </div>
-                      <div class="col-md-3 text-left">
-                        <button type="submit" id="confirm" class="btn btn-block btn-lg">Confirm</button>
-                      </div>
-                    </div>
-                  <!--</form> -->
-                  <div id='mapLanding'></div>
+  <!-- Masthead -->
+  <header class="masthead  text-center">
+    <!-- <div class="overlay"></div> -->
+    <div class="container">
+      <div class="row">
+        <div class=" col-xl-12 mx-auto">
+          <h1 class="mb-5">Don't be a Shut In, WeatherProof your day! </h1>
+          <h3 class="define">Find a new Meetup regardless of the Weather!</h3>                       
+        </div>  
+      </div>
 
-                </div>
-            </div>
+      <div id="overall">
+        <div class="row">
+          <div id="out" class="map-confirm"> <div >Current location: <span id="currLoc"></span></div></div>
         </div>
-    </header>
-    <div>
+        <!--div class="row">
+        <div class="map-confirm col-md-12 mx-auto">
+        <!-- <form> -->
+        
+        <div id="loc-search"class="row">
+          <div class="col-md-5 align-right">
+            <div id='geocoderLanding' ></div>
+          </div>
+        </div>
 
-        <!-- Icons Grid -->
-    <section class="features-icons  text-center">
-            <div class="container">
-              <div class="row">
-                <div class="meetup-icon col-lg-4">
-                  <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                    <div class="features-icons-icon d-flex">
-                             <img class="meetup" src="assets/images/meetup icon.png" style="width: auto;height: 100px;">
-                    </div>
+        <div id="loc-search"class="row">             
+          <div class="col-md-3 text-left">
+            <button type="submit" id="confirm" class="btn btn-block btn-lg">Confirm</button>
+          </div>
+        </div>
+    </div>
+                  
+    <!--</form> -->
+      <div id='mapLanding'></div>
+
+    </div>                    
+  </header>
+
+    <div>
+      <!-- Icons Grid -->
+      <section class="features-icons  text-center">
+        <div class="container">
+          <div class="row">
+            <div class="meetup-icon col-lg-4">
+              <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                <div class="features-icons-icon d-flex">
+                    <img class="meetup" src="assets/images/meetup icon.png" style="width: auto;height: 100px;">
+                </div>
                     <h3>Event Plans</h3>
                     <p class="lead mb-0">Find events, close to you!</p>
-                  </div>
-                </div>
-                <div class="forecast-icon col-lg-4">
-                  <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                    <div class="features-icons-icon d-flex">
-                            <img class="forecast" src="assets/images/weather-icon.png" style="width: auto;height: 100px;">
-                    </div>
-                    <h3>Daily Forecast</h3>
-                    <p class="lead mb-0">Weather for the Day!</p>
-                  </div>
-                </div>
-                <div class="fav-icon col-lg-4">
-                  <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                    <div class="features-icons-icon d-flex">
-                            <img class="fav" src="assets/images/fav-icon.jpg" style="width: auto;height: 100px;">
-                    </div>
-                    <h3>Favorites</h3>
-                    <p class="lead mb-0">Save your favorite plans!</p>
-                  </div>
-                </div>
               </div>
             </div>
-          </section>
+            <div class="forecast-icon col-lg-4">
+              <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                <div class="features-icons-icon d-flex">
+                  <img class="forecast" src="assets/images/weather-icon.png" style="width: auto;height: 100px;">
+                </div>
+                  <h3>Daily Forecast</h3>
+                  <p class="lead mb-0">Weather for the Day!</p>
+              </div>
+            </div>
+              <div class="fav-icon col-lg-4">
+                <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                  <div class="features-icons-icon d-flex">
+                      <img class="fav" src="assets/images/fav-icon.jpg" style="width: auto;height: 100px;">
+                  </div>
+                    <h3>Favorites</h3>
+                    <p class="lead mb-0">Save your favorite plans!</p>
+                </div>
+              </div>
+          </div>
+        </div>
+      </section>
    
 </body>
 

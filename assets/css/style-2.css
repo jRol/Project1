@@ -1,7 +1,9 @@
 #listings{
-  width:450px;
+  width:auto;
     height:300px;
   overflow-y:scroll;
+  
+ 
 }
 
 #map {
@@ -21,11 +23,11 @@
   margin-right: 300px;
 }
 
-.meet-list {
+/*.meet-list {
   right: -100px;
   
 
-}
+}*/
 
 .word {
   font-size: 20px;
@@ -104,11 +106,12 @@ td, th {
   border: 1px solid #ffffff;
   text-align: left;
   padding: 8px;
+  color: black;
 }
 
 tr:nth-child(even) {
   background-color: #ffffff;
-  color: darkgray;
+  color: black;
 }
 
 .fav-page{
@@ -121,6 +124,56 @@ padding-left:200px;
 
 
 }
+
+#fav-bac{
+  background-color: white;
+  background-size: cover;
+  width:auto;
+  height: auto;
+  margin-right:150px;
+}
+
+
+/*listing icon and text*/
+
+.fa-star {
+  color: goldenrod;
+  font-size: 25px;
+  padding-right: 10px;
+}
+
+.fa-map-marker-alt {
+  color: black;
+}
+
+.ml-1 {
+  color:  light gray;
+  font-size: 20px;
+  align-content: center;
+ 
+}
+
+#star-icon {
+  color: white;
+  font-size:18px;
+  
+  
+ 
+}
+
+/*.fa-snowflake-big{
+  font-size: 2em;
+}*/
+
+#confirm{
+  background-color: #009ad8;
+  width: 200px;
+  margin-top: 10px;
+  margin-left: 25px;
+  
+  
+}
+
 
 
 
@@ -378,12 +431,12 @@ form textarea {
       margin-right: 10px; }
     .site-header .branding .site-title {
       margin-bottom: 5px;
-      font-size: 16px;
-      font-size: 1.1428571429em;
+      font-size: 18px;
+      /*font-size: 1.1428571429em;*/
       color: white; }
     .site-header .branding .site-description {
-      font-size: 10px;
-      font-size: 0.7142857143em;
+      font-size: 14px;
+      /*font-size: 0.7142857143em;*/
       display: block;
       color: #bfc1c8; }
 

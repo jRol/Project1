@@ -16,8 +16,9 @@
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
     <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />   
     <script src="assets/javascript/app.js"></script>
-    <script src="assets/javascript/fav.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
+    <!--script src="assets/javascript/fav.js"></script-->
+    <!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script--> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
@@ -36,28 +37,30 @@
       <div class="container">
         <div class="modal fade" id="myModal" role="dialog" >
           <div class="modal-dialog">   
-            <div class="modal-content"> </div>
-                        
+            <div class="modal-content"> </div>                        
           </div>
         </div>
-          <a href="index.html" class="branding">
-            <!--img src="images/logo.png" alt="" class="logo"-->
-              <div class="logo-type">
-                <h1 class="site-title">Weather'd</h1>
-                  <small class="site-description">WeatherProof your day</small>
-              </div>
-          </a>
-      
-            <!-- Navigation -->
-            <div class="main-navigation">
-              <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
-                <ul class="menu">
-                  <li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
-                  <li class="menu-item"><a href="favorites.html">Favorites</a></li>
-                  <li class="menu-item"><a href="#">Sign Out</a></li>
-                </ul> <!-- .menu -->
-            </div> <!-- .main-navigation -->
-    </div> <!-- .site-header -->
+
+        <a href="index.html" class="branding">
+        <!--img  src="assets/images/logo_transparent.png" alt="" class="logo" style="width: 200px; height: 200px"-->
+        <!--mg  src="assets/images/logo_transparent.png" alt="" class="logo" style="width: 100px; height: 100px"-->
+          <div class="logo-type">
+            <h1 class="site-title">Weather'd</h1>
+              <small class="site-description">WeatherProof your day</small>
+          </div>
+        </a>
+
+        <!-- Navigation -->
+        <div class="main-navigation">
+          <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+            <ul class="menu">
+              <li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
+              <li class="menu-item"><a href="favorites.html">Favorites</a></li>
+              <li class="menu-item"><a href="#">Sign Out</a></li>
+            </ul> <!-- .menu -->
+        </div> <!-- .main-navigation -->
+
+  </div> <!-- .site-header -->
       
   <div class="hero" > </div>
 
@@ -68,40 +71,41 @@
           <div id='map' class='map'></div>                   
             <div class="today forecast">
               <div class="forecast-header">
-                <div class="day">Monday</div>
-                  <div class="date">6 Oct</div>
+                <div id="day" class="day"></div>
+                <div id="date" class="date"></div>
               </div> <!-- .forecast-header -->
-                    <div class="forecast-content">
-                      <div class="location">New York</div>
-                      <div class="degree">
-                        <div class="num">23<sup>o</sup>C</div>
-                      </div>
-                          <div class="forecast-icon">
-                            <img src="assets/images/placeholder.png" alt="" width=90-->
-                          </div>	
-                    </div>
-            </div>
-                      
-      </div>
+              <div class="forecast-content">
+                <div id="location" class="location"></div>
+                  <div class="degree">
+                    <div class="num"><span id="temp"></span></div>
+                 </div><!--.degree-->
+                  <div class="forecast-icon"> 
+                    <img src="assets/images/weather-pic.png" alt="" width=90>
+                    <!--i id="snowflake" class="fas fa-snowflake" alt="snowflake"></i-->
+                  </div>	                         
+              </div><!--.forecast-content-->
+            </div><!--.today forecast-->                      
+      </div><!--forecast-container-->
     </div>                 
-  </div>
+  </div><!--.forecast-table-->
   
   <div class="fullwidth-block" data-bg-color="#262936">
     <div class="container">
       <div class="row">
         <div class="date-range col-md-4">             
           <div class="news">
-            <input type="date" class="location-verify form-control form-control-lg" placeholder="">
-            <input type="date" class="location-verify form-control form-control-lg" placeholder="">
+            <input id="start-date" type="date" class="location-verify form-control form-control-lg" placeholder="">
+            <input id="end-date" type="date" class="location-verify form-control form-control-lg" placeholder="">            
             <button id="confirm" type="submit" class="btn btn-block btn-lg btn-info">Confirm</button>
-              <div class="date">From:<br> 
-                To:
-              </div>
+              <div class="invalid-feedback">Start Date must come before End Date</div>
+                <div class="date">From:<br> 
+                  To:
+                </div>
                 <!--h3><a href="#">Top One Event </a></h3>
-                  <p><img src="assets/images/placeholder.png" alt="#"></p>
-              </div-->
-          </div>
-        </div>
+                <p><img src="assets/images/placeholder.png" alt="#"></p>
+              </div--><!--.invalid-feedback-->
+          </div><!--.news-->
+        </div><!--.date-range-->
         
         <div class="col-md-6">
           <div id="meetup-cat">
@@ -110,67 +114,51 @@
                       <option selected value="">Choose a Category...</option>
                       
                   </select>
-              </div>
-           <!--  <h3><img class="meetup-icon" src="assets/images/meetup2.jpg" style="width: 60px;height: 60px;"><select id="select">
-                <option value="default"> <p class="word">Categories</p></option>
-
-              </select></a></h3> -->
-              <!--div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width: 75%"><img class="meetup-icon" src="assets/images/meetup2.jpg" style="width: 60px;height: 60px"><p class="word"> Categories</p></a>
-                <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" id="test"></a></li>
-                  
-
-                </ul-->
-
+                </div>
                 
-              </div>
-          </div>
-        </div>                                
-      </div>
+              </div><!--#categories-->                          
+          </div><!--#meetup-cat-->
+        <!--/div-->
+      </div>                                
     </div>
+  </div><!--fullwidth-block-->
   </div>
    
   <div class="fullwidth-block">
     <div class="container">
         <div class="tab">
-            <button class=" h2 section-title tablinks" onclick="openCity(event, 'listings')">Meetup Events</button>
+            <button  class=" h2 section-title tablinks" onclick="openCity(event, 'listings')" id="defaultOpen">Meetup Events</button>
             <button class="h2 section-title tablinks" onclick="openCity(event, 'meet-photo')">Meetups</button>
-            
+        </div>
+        
+        <div class="row">
+          <div class="meet-list col-md-12">          
+            <div id="listings" class="tabcontent arrow-list" > </div>
           </div>
 
-        
-            
-           
-
-      <div class="row">
-        <div class="meet-list col-md">
-          
-            <div id="listings" class="tabcontent arrow-list" > </div>
-        </div>
-        <div class="meet-pic col-md">
-         
-            <div id="meet-photo"  class="tabcontent photo-grid">
-              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-              <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
-            </div>
-        </div>
+        <div class="meet-pic col-md-12">
+          <div id="meet-photo"  class="tabcontent photo-grid">
+            <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+            <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+            <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+            <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+            <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+            <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+            <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+            <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+            <a href="#"><img src="assets/images/placeholder.png" alt="#"></a>
+          </div>
+        </div><!--.meet-pic-->
       </div>
     </div>
   </div>
               
-            </main> <!-- .main-content -->
+            <!--/main> <!-- .main-content -->
 
-            <script>
-              var select = document.getElementById("select"),
+  <script>
+              document.getElementById("defaultOpen").click();
+
+              /*var select = document.getElementById("select"),
                 arr = ["html", "css","java","php"];
               for(var i=0; i < arr.length; i++)
               { 
@@ -180,7 +168,9 @@
                 option.setAttribute ("value", arr[i]);
                 select.insertBefore(option,select.lastChild);
 
-              }
+              }*/
+
+               
 
               function openCity(evt, cityName) {
     var i, tabcontent, tablinks;
@@ -194,8 +184,10 @@
     }
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
+   
 }
-            </script>
+
+  </script>
            
                 
       
