@@ -9,6 +9,7 @@ $(document).ready(function() {
         storageBucket: "gwbootcamp-97ba0.appspot.com",
         messagingSenderId: "454079581913"
         };
+
     firebase.initializeApp(config);
     sessionStorage.clear();
     geoLoc();

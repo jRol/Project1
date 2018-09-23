@@ -161,9 +161,10 @@ padding-left:200px;
  
 }
 
-/*.fa-snowflake-big{
-  font-size: 2em;
-}*/
+/*listing map popup*/
+.mapboxgl-popup {
+  color:black;
+ }
 
 #confirm{
   background-color: #009ad8;
@@ -439,6 +440,12 @@ form textarea {
       /*font-size: 0.7142857143em;*/
       display: block;
       color: #bfc1c8; }
+
+      .branding{
+        position: relative;
+        top: -35px;
+ 
+      }
 
 .main-navigation {
   float: right; }
