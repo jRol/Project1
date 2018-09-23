@@ -15,7 +15,7 @@ $(document).ready(function() {
     geoLoc();
        
     $("#confirm").on("click", function(){
-        console.log(token);
+        console.log("random change");
         // if(token === "false") {
         //     console.log("signing in");
         //     signIn();
