@@ -1,5 +1,5 @@
 var latitude, longitude;
-var category, startDate="T00:00:00", endDate="T23:59:59";
+var category, startDate, endDate;
 
 // TESTING PURPOSES: Counter variables tracking number of events with a venue property and those with only a group property
 /* var venueCount = 0;
@@ -79,14 +79,20 @@ function displayMeetupAPI() {
     var queryURL = proxyURL + "https://api.meetup.com/find/upcoming_events?key=3f604954571041164226827581f6062&radius=30.0&lat=" + latitude + "&lon=" + longitude;
 
     if (mapInitiated) {
+        
         if (startDate === "T00:00:00" || endDate === "T23:59:59") {
 
             queryURL = queryURL + "&topic_category=" + category;
         }
-        else {
+        else if(startDate && endDate && category){
 
             queryURL = queryURL + "&topic_category=" + category + "&start_date_range=" + startDate + "&end_date_range=" + endDate;
+        } else {
+            queryURL = proxyURL + "https://api.meetup.com/find/upcoming_events?key=3f604954571041164226827581f6062&radius=30.0&lat=" + latitude + "&lon=" + longitude;
+
         }
+        console.log(queryURL);
+        
     }
 
     console.log(queryURL);
@@ -375,9 +381,9 @@ function getCategories() {
             $("#categories-drop").append(newCategory);
         }
 
-        $("#confirm").on("click", function() {
-
-            $("#start-date").removeClass("is-invalid");
+        $("#confirm").on("click", function(e) {
+            e.preventDefault();
+            $("#end-date").removeClass("is-invalid");
 
             console.log(category);
             
@@ -393,7 +399,7 @@ function getCategories() {
             // if validateDateTime(startDate, endDate) is false display validation error message, else run displayMeetupAPI()
             if (!validateDateTime(startDate, endDate)) {
 
-                $("#start-date").addClass("is-invalid");
+                $("#end-date").addClass("is-invalid");
             }
             else {
 
@@ -455,7 +461,7 @@ function getWeather() {
         $("#date").html(months[d.getMonth()] +" "+dd+", "+yyyy);
         
         var iconCode = response.weather[0].icon;
-        var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+        var iconUrl = "https://openweathermap.org/img/w/" + iconCode + ".png";
         $("#icon").html("<img src='" + iconUrl  + "' class='img-fluid w-25'>");
         $("#icon").prepend("<p>"+response.weather[0].main+"</p>");
  
