@@ -710,3 +710,10 @@ label {
 }
 
 
+.invalid-feedback{
+  position: absolute;
+  top:40px;
+  font-size: 24px;
+}
+
+

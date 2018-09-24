@@ -83,25 +83,32 @@
       
       <div class="row justify-content-center">
         <div class="col-md-12">
-           <form class="form-inline justify-content-center">
+           <form class="form-inline justify-content-center ">
               <div class="form-group">
                   <label class="date mr-2" for="start-date">To</label>
-                  <input id="start-date" type="date" class="mr-2 location-verify form-control form-control-lg" placeholder="">
+                  <input id="start-date" type="date" class="mr-2 form-control form-control-lg" placeholder="">
+                  <div class="invalid-feedback">&nbsp;</div>
+            
               </div>
               <div class="form-group">
-                  <label class="date mr-2" for="end-date">From</label>
-                  <input id="end-date" type="date" class=" mr-2 location-verify form-control form-control-lg" placeholder="">
-              </div>
-              <div class="invalid-feedback">Start Date must come before End Date</div>
+                  <label class="date mr-2 " for="end-date">From</label>
+                  <input id="end-date" type="date" class=" mr-2 form-control form-control-lg" placeholder="">
+                  <div class="invalid-feedback">Start Date must come before End Date</div>
+            
+                </div>
               
               <div id="categories">
                   <select id="categories-drop" class="mr-2 form-control form-control-lg">
                       <option selected value="">Choose a Category...</option>
                       
                   </select>
+                  <div class="invalid-feedback">&nbsp;</div>
+            
               </div>
               <button id="confirm" type="submit" class="btn btn-lg btn-info mx-0 my-0">
-                Confirm</button>
+                Search</button>
+                <div class="invalid-feedback">&nbsp;</div>
+            
            
                                 
             </form>    
