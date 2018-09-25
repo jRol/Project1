@@ -24,10 +24,10 @@ Future Changes:
 -integrate with other event websites like Eventbrite.
 -Allow sign up through Facebook
 
-APIs: 
+-APIs: 
   Open Weather API
   Meetup API
-Bootstrap
-Mapbox GL
-Google Authentication
-Firebase
+-Bootstrap
+-Mapbox GL
+-Google Authentication
+-Firebase
