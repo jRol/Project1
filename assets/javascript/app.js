@@ -10,7 +10,6 @@ var map;
 var mapInitiated=false;
 var email;
 
-
 $(document).ready(function() {
     longitude=sessionStorage.getItem("longitude");
     latitude=sessionStorage.getItem("latitude");
@@ -61,23 +60,23 @@ $(document).on("click",'.star',function(){
 
     setTimeout(function(){
         $('#myModal').modal('hide')
-      }, 3000);
-    
-    
-     
+    }, 3000); 
 });
 
+// Function calling the upcoming_events Meetup API, using the parameters: radius, latitude, longitude, category, startDate, endDate
 function displayMeetupAPI() {
 
-    
-
     console.log("in "+ latitude);
-        console.log(longitude);
+    console.log(longitude);
+
+    // Proxy URL allowing the app to call Meetup API, which is not CORS friendly
     var proxyURL = "https://cors-anywhere.herokuapp.com/";
     //var proxyURL="https://secret-ocean-49799.herokuapp.com/";
 
+    // Default Meetup API call using only the parameters: radius, latitude, and longitude
     var queryURL = proxyURL + "https://api.meetup.com/find/upcoming_events?key=3f604954571041164226827581f6062&radius=30.0&lat=" + latitude + "&lon=" + longitude;
 
+    // Logic adding parameters to upcoming_events Meetup API: if category parameter is provide add it to queryURL; else if startDate and endDate and category parameters are provided add them to queryURL; else if no new parameters are provided use the default queryURL.
     if (mapInitiated) {
         
         if (startDate === "T00:00:00" || endDate === "T23:59:59") {
@@ -103,6 +102,7 @@ function displayMeetupAPI() {
     method: "GET"
     }).then(function(response) {
 
+        // Events object which will contain all event objects that are created using the Meetup API data
         events = {
 
             "type": "FeatureCollection",
@@ -112,6 +112,7 @@ function displayMeetupAPI() {
         // Logging original response object that is coming over from Meetup API
         console.log(response);
 
+        // For loop creating each event object that will be placed in the events object.  The if/else logic parses the Meetup API upcoming_events call and the parsed data is used to create each event object.
         for (var i = 0; i < response.events.length; i++) {
 
             var event = {
@@ -161,8 +162,6 @@ function displayMeetupAPI() {
     });
 }
 
-
-
 var renderMap = function () {
     
     mapboxgl.accessToken = 'pk.eyJ1IjoiYWlzaHRpYXEiLCJhIjoiY2psdnBtY2VvMDUyMTNxcXN0ZGJwcjd2YiJ9.jiV57t9pdOYOb8iJc_xABg';
@@ -178,7 +177,6 @@ var renderMap = function () {
         accessToken: mapboxgl.accessToken
     });
     
-    
     map.addControl(geocoder);
     geocoder.on('result', function(ev) {
         events = {};
@@ -193,8 +191,6 @@ var renderMap = function () {
         displayMeetupAPI();
     });
 
-    
-    
     map.on('load', function (e) {
         map.addSource("places", {
             "type": "geojson",
@@ -207,7 +203,6 @@ var renderMap = function () {
         mapInitiated=true;
     
     });
-
 
 }
 
@@ -234,13 +229,11 @@ function clearMap() {
 
 function displayMarkers(events) {
 
-    
     events.features.forEach(function(marker, i) {
        
         var el = document.createElement('div');
         el.innerHTML="<i class='fas fa-map-marker-alt fa-2x'>";
         el.setAttribute("class","marker");
-        
                 
         new mapboxgl.Marker(el)
             .setLngLat(marker.geometry.coordinates)
@@ -267,6 +260,7 @@ function displayMarkers(events) {
         });
     });
 }
+
 function flyToEvent(currentFeature) {
     map.flyTo({
         center: currentFeature.geometry.coordinates,
@@ -293,16 +287,13 @@ function buildLocationList(data) {
         //this is where all the properties are
         var prop = currentFeature.properties;
 
-       
-
         var listing = $("<div class='mb-4' >");
         listing.addClass('item');
         listing.attr("id","listing-" + i);
 
-         //dont change this
-         var listings = $('#listings');
+        //dont change this
+        var listings = $('#listings');
          
-        
         var favButton = $("<p class='mx-1 my-1 star' data-toggle='modal' data-target='#myModal' >");
         favButton.html('<i class="fas fa-star float-left"></i>');
         favButton.attr("data-position",i);
@@ -313,10 +304,6 @@ function buildLocationList(data) {
         details.html(prop.name);
 
         listing.append(details);
-
-
-       
-
 
         //this is converting the address to a link. you can change it to what you want
         // dont change the rest of the code
@@ -350,14 +337,11 @@ function buildLocationList(data) {
             this.parentNode.classList.add('active');
         
          });
-
-        
-
-
         
     }
 }
 
+// Function calling the topic_categories Meetup API, and dynamically populating the Categories dropdown
 function getCategories() {
 
     var proxyURL = "https://cors-anywhere.herokuapp.com/";
@@ -370,9 +354,11 @@ function getCategories() {
     }).then(function(response) {
 
         console.log(category);
+        
         // Logging original response object that is coming over from Meetup API
         console.log(response);
 
+        // For loop dynamically populating the Categories dropdown
         for (var i = 0; i < response.length; i++) { 
 
             var newCategory = $("<option>");
@@ -381,6 +367,7 @@ function getCategories() {
             $("#categories-drop").append(newCategory);
         }
 
+        // Listener handling when the user submits the filters they wish to add to the upcoming_events API, accounting for the selected category, as well as the input value of the startDate and endDate
         $("#confirm").on("click", function(e) {
             e.preventDefault();
             $("#end-date").removeClass("is-invalid");
@@ -406,22 +393,12 @@ function getCategories() {
                 displayMeetupAPI();  
             }
             
-          /*   displayMeetupAPI(); */
-           /*  if (selectedValue === "choose") {
-
-                console.log("Please select a category type");
-                category = selectedValue;
-            }
-            else {
-
-                console.log(selectedValue);
-                category = selectedValue;
-            } */
             console.log(category);
         });
     });
 }
 
+// Function validating that the user input a startDate that comes before the endDate
 function validateDateTime(start, end) {
 
     if (start === "T00:00:00" || end === "T23:59:59") {
@@ -464,10 +441,5 @@ function getWeather() {
         var iconUrl = "https://openweathermap.org/img/w/" + iconCode + ".png";
         $("#icon").html("<img src='" + iconUrl  + "' class='img-fluid w-25'>");
         $("#icon").prepend("<p>"+response.weather[0].main+"</p>");
- 
-            
     });  
-
-   
-
 }
