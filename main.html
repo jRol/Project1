@@ -58,22 +58,21 @@
     <div class="container">
       <div class="forecast-container">
         <div id='geocoder' class='geocoder'></div>
-          <div id='map' class='map'></div>                   
-            <div class="today forecast">
-              <div class="forecast-header">
+        <div id='map' class='map'></div>                   
+        <div class="today forecast">
+            <div class="forecast-header">
                 <div id="day" class="day"></div>
                 <div id="date" class="date"></div>
-              </div> <!-- .forecast-header -->
-              <div class="forecast-content">
+            </div> <!-- .forecast-header -->
+            <div class="forecast-content">
                 <div id="location" class="location"></div>
-                  <div class="degree">
-                    <div class="num"><span id="temp"></span></div>
-                 </div><!--.degree-->
-                  <div id="icon" > 
-                    
-                  </div>	                         
-              </div><!--.forecast-content-->
-            </div><!--.today forecast-->                      
+                <div class="degree">
+                   <div class="num"><span id="temp"></span></div>
+                </div><!--.degree-->
+                <div id="icon" > 
+                </div>	                         
+            </div><!--.forecast-content-->
+         </div><!--.today forecast-->                      
       </div><!--forecast-container-->
     </div>                 
   </div><!--.forecast-table-->
@@ -85,17 +84,17 @@
         <div class="col-md-12">
            <form class="form-inline justify-content-center ">
               <div class="form-group">
-                  <label class="date mr-2" for="start-date">To</label>
+                  <label class="date mr-2" for="start-date">From</label>
                   <input id="start-date" type="date" class="mr-2 form-control form-control-lg" placeholder="">
                   <div class="invalid-feedback">&nbsp;</div>
             
               </div>
               <div class="form-group">
-                  <label class="date mr-2 " for="end-date">From</label>
+                  <label class="date mr-2 " for="end-date">To</label>
                   <input id="end-date" type="date" class=" mr-2 form-control form-control-lg" placeholder="">
                   <div class="invalid-feedback">Start Date must come before End Date</div>
             
-                </div>
+              </div>
               
               <div id="categories">
                   <select id="categories-drop" class="mr-2 form-control form-control-lg">
