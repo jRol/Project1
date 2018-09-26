@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-        
+  //initialize firebase
   var config = {
       apiKey: "AIzaSyC9pE2ORuZUcAnZM_4fnUDSScgurVLBbN8",
       authDomain: "gwbootcamp-97ba0.firebaseapp.com",
@@ -16,21 +16,16 @@ $(document).ready(function() {
 
     var database = firebase.database();
     var email;
+    //check if the user is logged in otherwise dont display anything
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-          console.log("user signed in");
-          console.log(user.displayName);
+         
           email=user.email;
-          console.log(email);
+          //do a firebase lookup for the user who is logged in and only display their favorites
           database.ref('/meetupFavs').orderByChild('email').equalTo(email).on("child_added", function(snapshot) {
             var sv = snapshot.val();
-            console.log(sv);
-            
-            console.log(sv.favMeetup.name);
-            //dont change this
             var listings = $('#container');
             
-    
             var favButton = $("<p class='mx-1 my-1 star' data-toggle='modal' data-target='#myModal' >");
             favButton.html('<i class="fas fa-trash-alt float-left"></i>');
            
@@ -43,13 +38,8 @@ $(document).ready(function() {
             
             var address = $("<p>");
             address.html(sv.favMeetup.address);
-              listings.append(address);
-            
-          //   var details = $("<div>");
-          //   details.html("<p>"+sv.favMeetup.name+"</p>");
-    
-           
-    
+            listings.append(address);
+          
         });
         } else {
           console.log("boo hoo. no user");
