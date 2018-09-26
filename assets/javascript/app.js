@@ -1,21 +1,22 @@
+//global variables
 var latitude, longitude;
 var category, startDate, endDate;
-
-// TESTING PURPOSES: Counter variables tracking number of events with a venue property and those with only a group property
-/* var venueCount = 0;
-var groupCount = 0; */
-
 var events = {};
 var map;
 var mapInitiated=false;
 var email;
 
 $(document).ready(function() {
+    //get long and lat from session storage. These were added from index.js on the first page
     longitude=sessionStorage.getItem("longitude");
     latitude=sessionStorage.getItem("latitude");
+    //load categories
     getCategories();
+    
+    //display weather
     getWeather();
 
+    //initialize firebase
     var config = {
         apiKey: "AIzaSyC9pE2ORuZUcAnZM_4fnUDSScgurVLBbN8",
         authDomain: "gwbootcamp-97ba0.firebaseapp.com",
@@ -26,28 +27,26 @@ $(document).ready(function() {
         };
 
     firebase.initializeApp(config);
-        
     
+    //check if user is logged in and get there email
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           console.log("user signed in");
-          console.log(user.displayName);
+          
           email=user.email;
         } else {
           console.log("boo hoo. no user");
         }
     });
-    console.log(mapInitiated);
+    
+    //display meetup info
     displayMeetupAPI();
     
 });
 
+//function for saving favorites
 $(document).on("click",'.star',function(){
     var favMeetup = events.features[$(this).attr("data-position")];
-    console.log("star clicked");
-    console.log($(this).attr("data-position"));
-
-    console.log(favMeetup.properties);
     
     var database = firebase.database();
     sessionStorage.setItem("email", email);
@@ -56,6 +55,7 @@ $(document).on("click",'.star',function(){
         favMeetup: favMeetup.properties
     });
     
+    //display modal once the favorite has been added
     $("#myModal").modal();
 
     setTimeout(function(){
@@ -162,6 +162,7 @@ function displayMeetupAPI() {
     });
 }
 
+//function for displaying the map and initializing it with the data from meetup
 var renderMap = function () {
     
     mapboxgl.accessToken = 'pk.eyJ1IjoiYWlzaHRpYXEiLCJhIjoiY2psdnBtY2VvMDUyMTNxcXN0ZGJwcjd2YiJ9.jiV57t9pdOYOb8iJc_xABg';
@@ -185,9 +186,6 @@ var renderMap = function () {
         longitude=ev.result.geometry.coordinates[0];
         latitude=ev.result.geometry.coordinates[1];
 
-        console.log(latitude);
-        console.log(longitude);
-
         displayMeetupAPI();
     });
 
@@ -206,15 +204,14 @@ var renderMap = function () {
 
 }
 
+//update the map every time data changes
 function updateMap(){
-    console.log("in update map");
-    console.log(events);
-
+    
     clearMap();
     getWeather();
     map.getSource('places').setData(events);
     
-    //create the Markters
+    //create the Markers
     displayMarkers(events);
 
     //Populate the meetup table
@@ -222,11 +219,13 @@ function updateMap(){
     
 }
 
+//remove previous markers
 function clearMap() {
     $('.marker').remove();
     $('#listings').empty();
 }
 
+//display new markers
 function displayMarkers(events) {
 
     events.features.forEach(function(marker, i) {
@@ -261,6 +260,7 @@ function displayMarkers(events) {
     });
 }
 
+//zoom the map on the marker selected
 function flyToEvent(currentFeature) {
     map.flyTo({
         center: currentFeature.geometry.coordinates,
@@ -268,6 +268,7 @@ function flyToEvent(currentFeature) {
     });
 }
 
+//display the pop up when marker is clicked
 function createPopUp(currentFeature) {
     var popUps = document.getElementsByClassName('mapboxgl-popup');
     if (popUps[0]) popUps[0].remove();
@@ -280,6 +281,7 @@ function createPopUp(currentFeature) {
         .addTo(map);
 }
 
+//put together the list of events for displaying on map and in table
 function buildLocationList(data) {
     for (i = 0; i < data.features.length; i++) {
         var currentFeature = data.features[i];
@@ -320,8 +322,7 @@ function buildLocationList(data) {
         $(document).on('click','.link' ,function(e){
             // Update the currentFeature to the store associated with the clicked link
             var clickedListing = data.features[$(this).attr("data-position")];
-            console.log("listing clicked");
-            console.log($(this).attr("data-position"));
+            
             // 1. Fly to the point
             flyToEvent(clickedListing);
         
@@ -393,7 +394,7 @@ function getCategories() {
                 displayMeetupAPI();  
             }
             
-            console.log(category);
+            //console.log(category);
         });
     });
 }
@@ -411,6 +412,8 @@ function validateDateTime(start, end) {
     } 
 }
 
+//get weather information every time location changes.
+//also display date time etc
 function getWeather() {
 
     var APIKey = "9cf07e60efb34da49a4496096daf288b";
